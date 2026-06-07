@@ -918,9 +918,88 @@ function renderMemoryWall() {
   });
 }
 
+// ========== 留言板渲染 ==========
+function renderMessages() {
+  const list = document.getElementById('messageList');
+  if (!list) return;
+  if (messages.length === 0) {
+    list.innerHTML = '<div class="empty-stories"><p>📝</p><p>还没有人分享故事……<br>写下你在初中的第一个回忆吧 ✨</p></div>';
+    return;
+  }
+  list.innerHTML = messages.map(s => {
+    const tagHtml = s.tag ? '<span class="sc-tag">#' + s.tag + '</span>' : '';
+    return '<div class="story-card"><div class="sc-top"><span class="sc-name">' + s.name + '</span><span class="sc-time">' + s.time + '</span></div><div class="sc-text">' + s.content + '</div>' + tagHtml + '</div>';
+  }).join('');
+  renderMarquee();
+}
 
+// ========== 跑马灯渲染 ==========
+function renderMarquee() {
+  const track = document.getElementById('marqueeTrack');
+  if (!track || messages.length === 0) return;
+  const items = messages.slice(0, 20).map(s =>
+    '<span class="marquee-item"><span class="mq-icon">💬</span><span class="mq-name">' + s.name + '</span><span class="mq-sep">：</span>' + s.content.slice(0, 30) + (s.content.length > 30 ? '…' : '') + '</span>'
+  ).join('<span class="marquee-item" style="color:rgba(255,255,255,0.3)">✦</span>');
+  track.innerHTML = items + '<span class="marquee-item" style="color:rgba(255,255,255,0.3)">✦</span>' + items;
+}
 
+// ========== 相册 ==========
+let galleryIndex = [];
+let currentPhoto = 0;
 
+function renderGallery() {
+  const grid = document.getElementById('galleryGrid');
+  if (!grid) return;
+  fetch('photo_data.json')
+    .then(r => r.json())
+    .then(photos => {
+      galleryIndex = photos;
+      if (photos.length === 0) {
+        grid.innerHTML = '<div class="empty-stories"><p>📷</p><p>暂无照片</p></div>';
+        return;
+      }
+      grid.innerHTML = photos.slice(0, 200).map((p, i) =>
+        '<div class="gallery-item" onclick="openLightbox(' + i + ')"><img src="' + p.src + '" loading="lazy" alt="校园照片 ' + (i+1) + '"><div class="gl-overlay"></div><span class="gl-icon">🔍</span></div>'
+      ).join('');
+    })
+    .catch(() => {
+      grid.innerHTML = '<div class="empty-stories"><p>📷</p><p>相册加载中...</p></div>';
+    });
+}
+
+function openLightbox(idx) {
+  currentPhoto = idx;
+  const lb = document.getElementById('lightbox');
+  const img = document.getElementById('lbImage');
+  img.src = galleryIndex[idx].src;
+  document.getElementById('lbCounter').textContent = (idx + 1) + ' / ' + galleryIndex.length;
+  lb.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox(e) {
+  if (e && e.target !== e.currentTarget) return;
+  document.getElementById('lightbox').classList.remove('show');
+  document.body.style.overflow = '';
+}
+function prevPhoto() {
+  if (!galleryIndex.length) return;
+  currentPhoto = (currentPhoto - 1 + galleryIndex.length) % galleryIndex.length;
+  document.getElementById('lbImage').src = galleryIndex[currentPhoto].src;
+  document.getElementById('lbCounter').textContent = (currentPhoto + 1) + ' / ' + galleryIndex.length;
+}
+function nextPhoto() {
+  if (!galleryIndex.length) return;
+  currentPhoto = (currentPhoto + 1) % galleryIndex.length;
+  document.getElementById('lbImage').src = galleryIndex[currentPhoto].src;
+  document.getElementById('lbCounter').textContent = (currentPhoto + 1) + ' / ' + galleryIndex.length;
+}
+document.addEventListener('keydown', (e) => {
+  const lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('show')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') prevPhoto();
+  if (e.key === 'ArrowRight') nextPhoto();
+});
 
 function addMessage() {
   const name = document.getElementById('msgName').value.trim() || '匿名同学';
@@ -933,7 +1012,6 @@ function addMessage() {
   });
   localStorage.setItem('juniorMessages', JSON.stringify(messages));
   renderMessages();
-  renderGallery();
   document.getElementById('msgContent').value = '';
 }
 
@@ -953,12 +1031,10 @@ function togglePlay() {
 
 // ========== 初始化 ==========
 renderMessages();
-  renderGallery();
-  renderGallery();
 renderTimeline();
 renderMemoryWall();
-renderMessages();
-  renderGallery();
+renderMarquee();
+renderGallery();
 
 // ========== 滾动动画 ==========
 const observer = new IntersectionObserver((entries) => {
