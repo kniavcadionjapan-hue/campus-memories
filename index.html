@@ -565,6 +565,140 @@ footer {
   100% { transform: translateX(-50%); }
 }
 
+
+/* ===== 校园相册 ===== */
+.gallery-section {
+  padding: 40px 16px 60px;
+  background: #f7f3ed;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+  max-width: 900px;
+  margin: 20px auto 0;
+  padding: 0 16px;
+}
+.gallery-item {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 1;
+  background: #e8e0d4;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.gallery-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  z-index: 5;
+}
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.gallery-item .gl-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(0,0,0,0.4) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.gallery-item:hover .gl-overlay {
+  opacity: 1;
+}
+.gallery-item .gl-icon {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  color: #fff;
+  font-size: 18px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.gallery-item:hover .gl-icon {
+  opacity: 1;
+}
+
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.lightbox.show {
+  display: flex;
+}
+.lightbox img {
+  max-width: 95vw;
+  max-height: 90vh;
+  border-radius: 8px;
+  object-fit: contain;
+}
+.lightbox .lb-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #fff;
+  font-size: 32px;
+  cursor: pointer;
+  background: rgba(255,255,255,0.1);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  border: none;
+}
+.lightbox .lb-close:hover {
+  background: rgba(255,255,255,0.3);
+}
+.lightbox .lb-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 36px;
+  cursor: pointer;
+  background: rgba(255,255,255,0.1);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  border: none;
+}
+.lightbox .lb-nav:hover {
+  background: rgba(255,255,255,0.3);
+}
+.lightbox .lb-prev { left: 20px; }
+.lightbox .lb-next { right: 20px; }
+.lightbox .lb-counter {
+  position: absolute;
+  bottom: 30px;
+  color: rgba(255,255,255,0.6);
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+@media (max-width: 600px) {
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 6px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -636,6 +770,23 @@ footer {
   </div>
   <div class="guestbook-messages" id="messageList"></div>
 </section>
+
+
+<!-- ========== 校园相册 ========== -->
+<section class="gallery-section">
+  <h2 class="section-title">📸 校园相册</h2>
+  <p class="section-sub">那些年，我们用照片记录的时光</p>
+  <div class="gallery-grid" id="galleryGrid"></div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <button class="lb-nav lb-prev" onclick="prevPhoto()">‹</button>
+  <button class="lb-nav lb-next" onclick="nextPhoto()">›</button>
+  <img id="lbImage" src="" alt="">
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
 
 <!-- ========== 音乐播放器 ========== -->
 <div class="candy-display">
@@ -826,6 +977,7 @@ function togglePlay() {
 
 // ========== 初始化 ==========
 renderStories();
+  renderGallery();
 renderTimeline();
 renderMemoryWall();
 renderMessages();
