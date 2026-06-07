@@ -520,9 +520,11 @@ footer {
 .marquee-track {
   display: flex;
   align-items: center;
-  gap: 40px;
-  animation: marqueeScroll 30s linear infinite;
+  gap: 50px;
+  animation: marqueeScroll 40s linear infinite;
   width: max-content;
+  min-width: 100%;
+  padding-right: 20px;
 }
 .marquee-track:hover {
   animation-play-state: paused;
@@ -717,9 +719,9 @@ footer {
 
 <!-- ========== 滚动留言 ========== -->
 <div class="marquee-section">
-  <div style="display:flex;align-items:center;overflow:hidden">
+  <div style="display:flex;align-items:center;overflow:hidden;max-width:100%">
     <span class="marquee-label">💬 滚动留言</span>
-    <div class="marquee-track" id="marqueeTrack"></div>
+    <div class="marquee-track" id="marqueeTrack" style="width:100%"></div>
   </div>
 </div>
 
@@ -931,6 +933,7 @@ function addMessage() {
   });
   localStorage.setItem('juniorMessages', JSON.stringify(messages));
   renderMessages();
+  renderGallery();
   document.getElementById('msgContent').value = '';
 }
 
@@ -951,9 +954,11 @@ function togglePlay() {
 // ========== 初始化 ==========
 renderMessages();
   renderGallery();
+  renderGallery();
 renderTimeline();
 renderMemoryWall();
 renderMessages();
+  renderGallery();
 
 // ========== 滾动动画 ==========
 const observer = new IntersectionObserver((entries) => {
