@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>那些年 · 初中回憶站</title>
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg: #f5f0e8;
+  --board: #2b5a3a;
+  --chalk: #f0e6d3;
+  --green: #3a7a4e;
+  --wood: #8b6914;
+  --pink: #f4a4b8;
+  --blue: #89c4e1;
+  --yellow: #f9d56e;
+  --text: #3a3a3a;
+  --shadow: rgba(0,0,0,0.1);
+}
+body {
+  font-family: 'Noto Sans SC', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+/* ========== HERO HEADER ========== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset:0;
+  opacity: 0.15;
+  background:
+    radial-gradient(circle at 20% 30%, #fff 1px, transparent 1px),
+    radial-gradient(circle at 80% 60%, #fff 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.hero::before {
+  content: '🏫';
+  position: absolute;
+  font-size: 200px;
+  opacity: 0.08;
+  top: 10%;
+  left: 5%;
+}
+.hero::after {
+  content: '📚';
+  position: absolute;
+  font-size: 150px;
+  opacity: 0.08;
+  bottom: 10%;
+  right: 5%;
+}
+.hero-title {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: clamp(3rem, 8vw, 6rem);
+  color: #fff;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  z-index: 1;
+  text-align: center;
+  animation: fadeInUp 1s ease;
+}
+.hero-sub {
+  font-size: 1.3rem;
+  color: rgba(255,255,255,0.85);
+  margin-top: 1rem;
+  z-index: 1;
+  animation: fadeInUp 1s ease 0.3s both;
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  z-index: 1;
+  animation: bounce 2s infinite;
+  color: rgba(255,255,255,0.6);
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* ========== 黑板區域 ========== */
+.blackboard-section {
+  padding: 60px 20px;
+  background: linear-gradient(180deg, var(--board), #1d3d28);
+}
+.blackboard {
+  max-width: 900px;
+  margin: 0 auto;
+  background: linear-gradient(145deg, #2e6a3e, #1d4d2a);
+  border: 12px solid var(--wood);
+  border-radius: 8px;
+  padding: 40px;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+.blackboard::before {
+  content: '📌';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+}
+.blackboard-title {
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 2.5rem;
+  color: var(--chalk);
+  text-align: center;
+  margin-bottom: 30px;
+}
+.blackboard-text {
+  font-family: 'ZCOOL XiaoWei', serif;
+  color: var(--chalk);
+  font-size: 1.2rem;
+  line-height: 2;
+  white-space: pre-line;
+}
+.chalk-line {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--chalk), transparent);
+  margin: 20px 0;
+}
+.chalk-cursor {
+  display: inline-block;
+  width: 12px;
+  height: 20px;
+  background: var(--chalk);
+  animation: blink 1s steps(1) infinite;
+  vertical-align: middle;
+}
+
+/* ========== 時間線 ========== */
+.timeline-section {
+  padding: 80px 20px;
+  background: var(--bg);
+}
+.section-title {
+  text-align: center;
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.section-sub {
+  text-align: center;
+  color: #888;
+  margin-bottom: 50px;
+}
+.timeline {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  padding-left: 50px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--blue), var(--pink), var(--yellow));
+  border-radius: 3px;
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 50px;
+  animation: fadeInUp 0.6s ease both;
+}
+.timeline-dot {
+  position: absolute;
+  left: -30px;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  background: var(--blue);
+}
+.timeline-item:nth-child(2) .timeline-dot { background: var(--pink); }
+.timeline-item:nth-child(3) .timeline-dot { background: var(--yellow); }
+.timeline-item:nth-child(4) .timeline-dot { background: #a8e6cf; }
+.timeline-item:nth-child(5) .timeline-dot { background: #ffaaa5; }
+.timeline-date {
+  font-size: 0.9rem;
+  color: #888;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.timeline-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 4px 20px var(--shadow);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.timeline-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+.timeline-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: #333;
+}
+.timeline-card p {
+  color: #666;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+.timeline-tag {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  margin-top: 10px;
+  margin-right: 6px;
+}
+.tag-blue { background: #e3f2fd; color: #1976d2; }
+.tag-pink { background: #fce4ec; color: #c2185b; }
+.tag-green { background: #e8f5e9; color: #388e3c; }
+.tag-orange { background: #fff3e0; color: #f57c00; }
+
+/* ========== 回憶牆/同學錄 ========== */
+.memory-wall {
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #667eea15, #764ba215);
+}
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.memory-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 4px 20px var(--shadow);
+  transition: all 0.3s;
+  position: relative;
+}
+.memory-card:hover {
+  transform: translateY(-5px) rotate(-0.5deg);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+}
+.memory-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+}
+.memory-card h4 {
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+.memory-card .date {
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-bottom: 10px;
+}
+.memory-card p {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.6;
+}
+.memory-emoji { font-size: 2rem; margin-bottom: 10px; }
+
+/* ========== 留言牆 ========== */
+.guestbook {
+  padding: 60px 20px;
+  background: var(--bg);
+}
+.guestbook-form {
+  max-width: 500px;
+  margin: 0 auto 40px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px var(--shadow);
+}
+.guestbook-form h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.guestbook-form input,
+.guestbook-form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #eee;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: inherit;
+  margin-bottom: 15px;
+  transition: border-color 0.3s;
+  resize: vertical;
+}
+.guestbook-form input:focus,
+.guestbook-form textarea:focus {
+  outline: none;
+  border-color: var(--blue);
+}
+.guestbook-form button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.guestbook-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102,126,234,0.4);
+}
+.guestbook-messages {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.message-item {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  animation: fadeInUp 0.3s ease;
+  box-shadow: 0 2px 10px var(--shadow);
+}
+.message-item strong {
+  color: #333;
+}
+.message-item .time {
+  font-size: 0.8rem;
+  color: #aaa;
+  float: right;
+}
+.message-item p {
+  margin-top: 8px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* ========== FOOTER ========== */
+footer {
+  text-align: center;
+  padding: 40px;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .blackboard { padding: 20px; }
+  .timeline { padding-left: 40px; }
+  .timeline-dot { left: -25px; width: 16px; height: 16px; }
+}
+
+/* 零食櫥窗 */
+.candy-display {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+}
+.candy-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, var(--pink), var(--yellow));
+  cursor: pointer;
+  font-size: 1.8rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  transition: transform 0.3s;
+}
+.candy-btn:hover { transform: scale(1.1) rotate(10deg); }
+
+/* 音樂播放器浮窗 */
+.music-player {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  z-index: 100;
+  display: none;
+}
+.music-player.show { display: block; }
+.music-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background: #fff;
+  padding: 10px 15px;
+  border-radius: 30px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+.music-controls button {
+  border: none;
+  background: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 5px;
+}
+</style>
+</head>
+<body>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <h1 class="hero-title">那些年，我們一起走過的初中</h1>
+  <p class="hero-sub">2014 — 2017 · 青春不散場</p>
+  <div class="hero-scroll" onclick="document.querySelector('.blackboard-section').scrollIntoView({behavior:'smooth'})">⌄</div>
+</section>
+
+<!-- ========== 黑板 ========== -->
+<section class="blackboard-section">
+  <div class="blackboard">
+    <div class="blackboard-title">📝 班長的話</div>
+    <hr class="chalk-line">
+    <div class="blackboard-text" id="typewriter"></div>
+    <hr class="chalk-line">
+    <div style="text-align:right;color:var(--chalk);font-family:'ZCOOL XiaoWei';margin-top:15px;">—— 致我們永不褪色的三年</div>
+  </div>
+</section>
+
+<!-- ========== 時間線 ========== -->
+<section class="timeline-section">
+  <h2 class="section-title">⏳ 我們的時間線</h2>
+  <p class="section-sub">那些年一起做過的傻事，現在看都是最好的回憶</p>
+  <div class="timeline" id="timelineContainer"></div>
+</section>
+
+<!-- ========== 回憶牆 ========== -->
+<section class="memory-wall">
+  <h2 class="section-title">📸 回憶牆</h2>
+  <p class="section-sub">每個人心中都有一個最好的同學</p>
+  <div class="memory-grid" id="memoryGrid"></div>
+</section>
+
+<!-- ========== 留言牆 ========== -->
+<section class="guestbook">
+  <h2 class="section-title">💬 同學留言板</h2>
+  <p class="section-sub">留下你想對同學們說的話</p>
+  <div class="guestbook-form">
+    <h3>✏️ 寫下你的留言</h3>
+    <input type="text" id="msgName" placeholder="你的名字（或外號）" maxlength="20">
+    <textarea id="msgContent" rows="3" placeholder="想說的話..." maxlength="200"></textarea>
+    <button onclick="addMessage()">📮 發送留言</button>
+  </div>
+  <div class="guestbook-messages" id="messageList"></div>
+</section>
+
+<!-- ========== 小零食 ========== -->
+<div class="candy-display">
+  <button class="candy-btn" onclick="toggleMusic()">🎵</button>
+</div>
+<div class="music-player" id="musicPlayer">
+  <div class="music-controls">
+    <button onclick="togglePlay()">▶️</button>
+    <span>那些年 - 胡夏</span>
+    <button onclick="toggleMusic()">✕</button>
+  </div>
+</div>
+
+<footer>
+  🌱 獻給我們的初中時光 · 青春是一場沒有返程的旅行
+</footer>
+
+<script>
+// ========== 黑板打字機 ==========
+const boardText = \`還記得嗎？
+
+2014年的夏天，我們穿著嶄新的校服走進那間教室。
+誰也不認識誰，誰也不知道，接下來的三年會成為一生中最珍貴的回憶。
+
+軍訓的時候——
+站軍姿站到腿發抖，晚上卻在宿舍偷偷分享一包泡麵。
+匯演時唱《團結就是力量》，有人唱破了音，有人唱紅了眼。
+
+初一，我們開始熟悉彼此。
+女生結伴去廁所，男生在走廊追逐打鬧。
+第一次月考，有人考砸了哭了一整個午休。
+
+初二，我們有了自己的小圈子。
+課間偷偷傳紙條，放學後一起去買五毛錢的辣條。
+那個夏天，操場上的夕陽永遠那麼好看。
+
+初三，黑板上的倒計時從280天變成0。
+課桌上的卷子越堆越高，在一起的時間越來越少。
+百日誓師那天，全班喊到嗓子沙啞。
+
+最後一科考完的那個下午——
+陽光很燦爛，風很溫柔。
+我們在校門口說「再見」，以為真的會再見。
+
+後來我們去了不同的城市，有了新的同學和朋友。
+但每次路過母校，還是會忍不住往裡面看。
+
+那些年，是最好的我們。
+那些年，是最好的時光。
+
+—— 致我們永不褪色的三年。\`;
+
+function typeWriter(text, element, speed = 50) {
+  let i = 0;
+  function type() {
+    if (i < text.length) {
+      element.innerHTML = text.slice(0, i + 1) + '<span class="chalk-cursor"></span>';
+      i++;
+      setTimeout(type, speed);
+    } else {
+      element.innerHTML = text;
+    }
+  }
+  type();
+}
+
+// ========== 時間線數據 ==========
+const timelineData = [
+  { date: '2014年9月', title: '🎒 初入校園', content: '第一次踏進校門，嶄新的書包裡裝著暑假作業和期待。教室裡五十幾張陌生的臉，誰也不知道接下來的三年會發生什麼。班主任在黑板寫下：「歡迎來到初中。」', tags: ['開學', '初識'] },
+  { date: '2014年10月', title: '🏕️ 軍訓', content: '站軍姿站到腿軟，走正步走到腳麻。晚上宿舍裡一起偷吃泡麵，被教官抓到罰做五十個俯臥撐。匯演那天唱《團結就是力量》，唱著唱著有人哭了。', tags: ['軍訓', '記憶'] },
+  { date: '2014年12月', title: '🎄 聖誕晚會', content: '班裡第一次搞晚會，教室掛滿了彩帶和氣球。有人唱歌跑調，全班笑得拍桌子。班長偷偷準備了聖誕禮物，每人一張手寫卡片。那晚誰也沒寫作業。', tags: ['晚會', '歡樂'] },
+  { date: '2015年3月', title: '📚 第一次月考', content: '初中第一次正經考試。數學考完一片哀嚎，有人說選擇題全靠蒙。成績出來那天，有人哭有人笑。班主任說：「這只是開始。」當時覺得好殘忍，現在想真是這樣。', tags: ['考試', '成長'] },
+  { date: '2015年4月', title: '🏃 春季運動會', content: '4×100接力最後一棒，我們班落後十米。結果最後一棒像開了掛一樣連超三人，衝線那一刻全班炸了！那年我們拿了年級第三，獎狀貼在教室後牆貼了三年。', tags: ['運動會', '熱血'] },
+  { date: '2015年6月', title: '🎤 校園歌手大賽', content: '文藝委員代表我們班唱了一首《那些年》。上台前她緊張得發抖，全班在台下喊「加油」。音樂響起全場安靜，唱到副歌有人跟著哼。最後拿了二等獎，但我們心裡她就是第一。', tags: ['文藝', '感動'] },
+  { date: '2015年9月', title: '🍂 初二分班', content: '最捨不得的一天。原來的班級被打散重組，好朋友分到了不同班。那天好多人在走廊哭。新班級的第一節課，大家都很沉默。後來慢慢認識了新同學，才發現原來也可以這麼好。', tags: ['分班', '離別'] },
+  { date: '2015年11月', title: '📝 第一次家長會', content: '成績單發下來那天，很多人把試卷藏起來了。家長會結束後，校門口一排排家長黑著臉，氣氛凝重。有個同學的家長會後追著他跑了三條街，成了班裡永遠的笑話。', tags: ['家長會', '趣事'] },
+  { date: '2016年3月', title: '🌸 春遊', content: '全班一起去植物園。女生忙著拍照，男生忙著抓蟲子嚇女生。中午野餐，大家交換零食，有人帶了媽媽做的壽司，被一搶而空。回程大巴上全班合唱，司機師傅說第一次見這麼吵的班。', tags: ['春遊', '歡樂'] },
+  { date: '2016年6月', title: '⚽ 班級足球賽', content: '雨戰！操場全是水坑，球踢起來帶起一片水花。比分2:2，最後五分鐘前鋒一個遠射，球劃出弧線鑽進球門。全班衝進雨裡慶祝，衣服濕透了也沒人在乎。那張渾身泥水的合照，現在還在抽屜裡。', tags: ['足球', '熱血'] },
+  { date: '2016年9月', title: '🎯 初三開學', content: '教室從三樓搬到四樓，黑板上多了「距中考還有280天」。班主任表情嚴肅地說：「這一年，會是你們人生中最重要的一年。」牆上的倒計時每天都在變，課桌上的書越堆越高。', tags: ['初三', '奮鬥'] },
+  { date: '2016年11月', title: '🌙 晚自習', content: '每天六點半到九點，教室裡只有筆尖劃過紙張的聲音。偶爾有人小聲討論題目，被值班老師瞪一眼。最期待的就是課間十分鐘——衝去小賣部買一瓶可樂，就是最大的幸福。', tags: ['晚自習', '日常'] },
+  { date: '2017年1月', title: '❄️ 跨年倒計時', content: '跨年那天，班長在黑板上寫了「新年快樂，中考加油」。全班在倒計時牌前合影，笑得都很用力。其實每個人心裡都清楚，離分別越來越近了。', tags: ['倒計時', '珍惜'] },
+  { date: '2017年3月', title: '📖 百日誓師', content: '全體初三生在操場上宣誓。喊口號的時候有人哭有人笑，班主任也紅了眼眶。「拼搏一百天，讓夢想在六月飛翔。」——現在念出這句話，還是會起雞皮疙瘩。', tags: ['誓師', '感動'] },
+  { date: '2017年4月', title: '📸 畢業照', content: '穿上市裡最土的畢業服，在校門口、操場、教學樓前拍了一圈。攝影師說「三二一」，大家喊「茄子」。那張照片現在看，每個人的笑容都那麼真。拍完照有人說：「以後聚會要常來啊。」', tags: ['畢業照', '惜別'] },
+  { date: '2017年6月', title: '🎓 中考', content: '最後一科英語考完，走出考場，陽光特別好。沒有想像中的狂歡，大家只是靜靜地收拾書包，互相說著「再見」。那天之後，有些人再也沒見過。', tags: ['中考', '告別'] },
+  { date: '2017年7月', title: '🍻 畢業聚餐', content: '全班去了一家火鍋店，有人喝醉了抱著班長哭，有人跟三年的「仇人」乾杯和解。班主任破天荒沒管我們，只是笑著看我們鬧。散場的時候，每個人都在同學錄上寫了很久很久。', tags: ['聚餐', '散場'] },
+  { date: '2018年至今', title: '💫 各自遠航', content: '上了不同高中，去了不同城市，有了新的朋友圈。有些人偶爾還在群裡聊天，有些人再也沒說過話。但每次路過母校，還是會忍不住往裡面看。那三年，是我們最好的三年。', tags: ['懷念', '青春'] }
+];
+
+const memoryData = [
+  { name: '班長', emoji: '👩‍🏫', msg: '你是我們班最靠譜的班長。每次大掃除你都是最後一個走的人，每次班會你都準備得最認真。謝謝你替我們扛了那麼多。' },
+  { name: '學霸同桌', emoji: '📖', msg: '感謝你借我抄了三年數學作業，每次考試前還幫我畫重點。我數學能及格，有一半功勞是你的！' },
+  { name: '前排女生', emoji: '🌸', msg: '你轉過頭來借橡皮的樣子，大概是初中三年最美的畫面。那塊橡皮我到現在還留著。' },
+  { name: '死黨小胖', emoji: '😄', msg: '一起翻牆出去買零食，一起被罰站，一起在廁所偷偷玩手機。你是我最好的兄弟，沒有之一！' },
+  { name: '足球隊長', emoji: '⚽', msg: '那場雨中的絕殺球，我們吹了整整三年。其實最懷念的不是進球，是大家一起在雨裡奔跑的感覺。' },
+  { name: '文藝委員', emoji: '🎶', msg: '每次音樂課你彈鋼琴的時候，全班都會安靜下來。你唱《那些年》的那天，是整個初中最動人的瞬間。' },
+  { name: '後桌兄弟', emoji: '🤣', msg: '上課踢我椅子，下課搶我零食，考試偷看我的卷子。煩得要死，但畢業後最想念的居然是你。' },
+  { name: '班主任', emoji: '👨‍🏫', msg: '當年覺得您太嚴格了，現在才知道您是為我們好。那句「你們是我帶過最吵的班」，是我們最驕傲的標籤。' },
+  { name: '語文科代表', emoji: '📝', msg: '你的作文每次都被老師當範文念。我寫不出來的時候你就幫我開頭，雖然最後還是寫跑題了（笑）。' },
+  { name: '隔壁班那個她', emoji: '💕', msg: '每次課間操都故意站最後，就為了多看你一眼。到畢業也沒說出口的那句話，就留在這裡吧。' },
+  { name: '值日搭檔', emoji: '🧹', msg: '跟你搭檔值日最開心了——因為你總是做大部分，我在旁邊划水。對不起！但你打掃得真的很乾淨！' },
+  { name: '體育課代表', emoji: '🏀', msg: '每次體育課分組，你都會把我這個「廢柴」選到自己隊。雖然我永遠是拖後腿的那個，但你從來沒嫌棄過。' },
+  { name: '小賣部阿姨', emoji: '🏪', msg: '阿姨你還記得我嗎？每天下課都來買辣條和冰可樂的那個小屁孩。五毛錢的快樂，現在花五十塊也買不到了。' },
+  { name: '英語老師', emoji: '🇬🇧', msg: '您的課從來沒人睡覺，因為您講課實在太有趣了。每次模仿外國人的語氣，全班都笑得前仰後合。' },
+  { name: '全班同學', emoji: '👥', msg: '三年看似很長，其實很短。短到我還沒記住每個人的名字，就要說再見了。無論你們在哪裡，都要好好的。' }
+];
+
+// ========== 渲染時間線 ==========
+function renderTimeline() {
+  const container = document.getElementById('timelineContainer');
+  timelineData.forEach((item, i) => {
+    const el = document.createElement('div');
+    el.className = 'timeline-item';
+    el.style.animationDelay = i * 0.15 + 's';
+    const tags = item.tags.map(t => `<span class="timeline-tag tag-blue">${t}</span>`).join('');
+    el.innerHTML = `
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">${item.date}</div>
+      <div class="timeline-card">
+        <h3>${item.title}</h3>
+        <p>${item.content}</p>
+        <div>${tags}</div>
+      </div>
+    `;
+    container.appendChild(el);
+  });
+}
+
+// ========== 渲染回憶牆 ==========
+function renderMemoryWall() {
+  const grid = document.getElementById('memoryGrid');
+  const colors = ['#e3f2fd', '#fce4ec', '#e8f5e9', '#fff3e0', '#f3e5f5', '#e0f7fa'];
+  memoryData.forEach((item, i) => {
+    const el = document.createElement('div');
+    el.className = 'memory-card';
+    const color = colors[i % colors.length];
+    el.innerHTML = `
+      <div class="memory-avatar" style="background:${color}">${item.emoji}</div>
+      <h4>給 ${item.name}</h4>
+      <p>${item.msg}</p>
+    `;
+    grid.appendChild(el);
+  });
+}
+
+// ========== 留言板 ==========
+let messages = JSON.parse(localStorage.getItem('juniorMessages') || '[]');
+
+function renderMessages() {
+  const list = document.getElementById('messageList');
+  list.innerHTML = messages.map(m => `
+    <div class="message-item">
+      <strong>${m.name}</strong> <span class="time">${m.time}</span>
+      <p>${m.content}</p>
+    </div>
+  `).join('');
+}
+
+function addMessage() {
+  const name = document.getElementById('msgName').value.trim() || '匿名同學';
+  const content = document.getElementById('msgContent').value.trim();
+  if (!content) return alert('寫點什麼吧~');
+  messages.unshift({
+    name,
+    content,
+    time: new Date().toLocaleString('zh-CN', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })
+  });
+  localStorage.setItem('juniorMessages', JSON.stringify(messages));
+  renderMessages();
+  document.getElementById('msgContent').value = '';
+}
+
+// ========== 音樂 ==========
+let musicPlaying = false;
+function toggleMusic() {
+  const p = document.getElementById('musicPlayer');
+  p.classList.toggle('show');
+}
+function togglePlay() {
+  musicPlaying = !musicPlaying;
+  // 音樂版權問題，演示效果用文字提示
+  if (musicPlaying) {
+    alert('🎵 那首歌在記憶裡浮現：\n「那些年錯過的大雨，那些年錯過的愛情……」');
+  }
+}
+
+// ========== 初始化 ==========
+setTimeout(() => {
+  typeWriter(boardText, document.getElementById('typewriter'));
+}, 500);
+renderTimeline();
+renderMemoryWall();
+renderMessages();
+
+// ========== 滾動動畫 ==========
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.timeline-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px)';
+  el.style.transition = 'all 0.6s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
