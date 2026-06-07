@@ -7,7 +7,7 @@
       "use": "@vercel/static"
     },
     {
-      "src": "photos/*.jpg",
+      "src": "photos/*.{jpg,JPG,jpeg,JPEG,png,PNG,gif,GIF,webp,WEBP,heic,HEIC}",
       "use": "@vercel/static"
     },
     {

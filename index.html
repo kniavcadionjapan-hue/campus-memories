@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>那些年 · 初中回忆站</title>
+<title>那些年 · 初中回憶站</title>
 <link href="https://cdn.jsdelivr.net/npm/@fontsource/ma-shan-zheng@5.0.16/index.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/@fontsource/zcool-xiaowei@5.0.16/index.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5.0.17/wght.css" rel="stylesheet">
@@ -21,14 +21,18 @@
   --yellow: #f9d56e;
   --text: #3a3a3a;
   --shadow: rgba(0,0,0,0.1);
+  --purple: #6b4e8e;
+  --purple2: #8959a3;
 }
+html { scroll-behavior: smooth; }
 body {
-  font-family: 'Noto Sans SC', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-
+  font-family: 'Noto Sans SC', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
 }
-/* ========== HERO HEADER ========== */
+
+/* ========== HERO ========== */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -43,7 +47,7 @@ body {
   position: absolute;
   inset:0;
   opacity: 0.12;
-  background-image: 
+  background-image:
     radial-gradient(circle at 15% 25%, #fff 1.5px, transparent 1.5px),
     radial-gradient(circle at 85% 40%, #fff 1px, transparent 1px),
     radial-gradient(circle at 40% 70%, #fff 1.2px, transparent 1.2px),
@@ -57,63 +61,35 @@ body {
   0% { opacity: 0.08; }
   100% { opacity: 0.18; }
 }
-.hero::before {
-  content: '🏫';
+.hero-emoji {
   position: absolute;
-  top: 12%;
-  left: 10%;
   font-size: 60px;
-  opacity: 0.25;
-  animation: float 6s ease-in-out infinite;
-}
-.hero::after {
-  content: '📚';
-  position: absolute;
-  bottom: 15%;
-  right: 8%;
-  font-size: 50px;
   opacity: 0.2;
-  animation: float 8s ease-in-out infinite reverse;
+  animation: float 6s ease-in-out infinite;
+  pointer-events: none;
 }
+.hero-emoji:nth-child(2) { top: 10%; left: 8%; animation-delay: 0s; }
+.hero-emoji:nth-child(3) { bottom: 12%; right: 6%; animation-delay: 2s; animation-direction: reverse; }
+.hero-emoji:nth-child(4) { top: 30%; right: 12%; font-size: 40px; animation-delay: 1s; }
+.hero-emoji:nth-child(5) { bottom: 30%; left: 10%; font-size: 45px; animation-delay: 3s; animation-direction: reverse; }
+
 @keyframes float {
   0%, 100% { transform: translateY(0) rotate(0deg); }
   50% { transform: translateY(-15px) rotate(5deg); }
 }
-.hero .deco-1 {
-  position: absolute;
-  top: 20%;
-  right: 15%;
-  font-size: 35px;
-  opacity: 0.2;
-  animation: float 7s ease-in-out infinite 1s;
-}
-.hero .deco-2 {
-  position: absolute;
-  bottom: 25%;
-  left: 12%;
-  font-size: 30px;
-  opacity: 0.18;
-  animation: float 9s ease-in-out infinite 0.5s;
-}
-.hero .deco-3 {
-  position: absolute;
-  top: 45%;
-  right: 5%;
-  font-size: 25px;
-  opacity: 0.15;
-  animation: float 5s ease-in-out infinite 2s;
-}
 .hero-title {
-  
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: clamp(2.8rem, 8vw, 5.5rem);
   color: #fff;
   text-shadow: 0 4px 20px rgba(0,0,0,0.3);
   z-index: 1;
   text-align: center;
   animation: fadeInUp 1s ease;
+  line-height: 1.3;
+  padding: 0 20px;
 }
 .hero-sub {
-  font-size: 1.3rem;
+  font-size: clamp(1rem, 3vw, 1.3rem);
   color: rgba(255,255,255,0.85);
   margin-top: 1rem;
   z-index: 1;
@@ -127,9 +103,23 @@ body {
   color: rgba(255,255,255,0.6);
   font-size: 2rem;
   cursor: pointer;
+  transition: color 0.3s, transform 0.3s;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(4px);
+}
+.hero-scroll:hover {
+  color: #fff;
+  transform: scale(1.15);
+  background: rgba(255,255,255,0.15);
 }
 
-/* ========== 黑板區域 ========== */
+/* ========== 黑板 ========== */
 .blackboard-section {
   padding: 60px 20px;
   background: linear-gradient(180deg, var(--board), #1d3d28);
@@ -153,16 +143,16 @@ body {
   font-size: 2rem;
 }
 .blackboard-title {
-  
+  font-family: 'Ma Shan Zheng', cursive;
   font-size: 2.5rem;
   color: var(--chalk);
   text-align: center;
   margin-bottom: 30px;
 }
 .blackboard-text {
-  
+  font-family: 'Ma Shan Zheng', cursive;
   color: var(--chalk);
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
   line-height: 2;
   white-space: pre-line;
 }
@@ -177,34 +167,94 @@ body {
   width: 12px;
   height: 20px;
   background: var(--chalk);
-  animation: blink 1s steps(1) infinite;
-  vertical-align: middle;
+  animation: blink 0.8s infinite;
 }
 
-/* ========== 时间线 ========== */
-.timeline-section {
-  padding: 80px 20px;
-  background: var(--bg);
+/* ========== 滾動留言跑馬燈 ========== */
+.marquee-section {
+  background: linear-gradient(135deg, #4a3f6b, #6b4e8e);
+  padding: 18px 0;
+  overflow: hidden;
+  position: relative;
+  border-top: 2px solid rgba(255,255,255,0.1);
+  border-bottom: 2px solid rgba(255,255,255,0.1);
 }
+.marquee-section::before,
+.marquee-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+.marquee-section::before { left: 0; background: linear-gradient(90deg, #4a3f6b, transparent); }
+.marquee-section::after { right: 0; background: linear-gradient(-90deg, #4a3f6b, transparent); }
+.marquee-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #ffd700;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0 16px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  animation: marqueeScroll 40s linear infinite;
+  width: max-content;
+  min-width: 100%;
+  padding-right: 20px;
+}
+.marquee-track:hover { animation-play-state: paused; }
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  color: rgba(255,255,255,0.85);
+  font-size: 14px;
+}
+.marquee-item .mq-icon { font-size: 16px; }
+.marquee-item .mq-name { font-weight: 600; color: #ffd700; }
+.marquee-item .mq-sep { color: rgba(255,255,255,0.3); margin: 0 4px; }
+.marquee-empty {
+  color: rgba(255,255,255,0.4);
+  font-size: 14px;
+  padding: 0 16px;
+}
+
+/* ========== 通用區塊 ========== */
 .section-title {
-  font-family: 'ZCOOL XiaoWei', 'Noto Sans SC', cursive;
-  font-weight: 400;
-  letter-spacing: 3px;
+  font-family: 'ZCOOL XiaoWei', serif;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
   text-align: center;
-  
-  font-size: 2.8rem;
+  color: #333;
   margin-bottom: 10px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 .section-sub {
   text-align: center;
   color: #888;
+  font-size: 1rem;
   margin-bottom: 50px;
 }
+
+/* ========== 時間線 ========== */
+.timeline-section {
+  padding: 80px 20px;
+  background: #fff;
+}
 .timeline {
-  max-width: 800px;
+  max-width: 700px;
   margin: 0 auto;
   position: relative;
   padding-left: 50px;
@@ -234,6 +284,11 @@ body {
   border: 3px solid #fff;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   background: var(--blue);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.timeline-item:hover .timeline-dot {
+  transform: scale(1.3);
+  box-shadow: 0 0 16px rgba(137, 196, 225, 0.5);
 }
 .timeline-item:nth-child(2) .timeline-dot { background: var(--pink); }
 .timeline-item:nth-child(3) .timeline-dot { background: var(--yellow); }
@@ -251,10 +306,11 @@ body {
   padding: 25px;
   box-shadow: 0 4px 20px var(--shadow);
   transition: transform 0.3s, box-shadow 0.3s;
+  border: 1px solid rgba(0,0,0,0.04);
 }
 .timeline-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
 }
 .timeline-card h3 {
   font-size: 1.2rem;
@@ -279,10 +335,10 @@ body {
 .tag-green { background: #e8f5e9; color: #388e3c; }
 .tag-orange { background: #fff3e0; color: #f57c00; }
 
-/* ========== 回忆牆/同学录 ========== */
+/* ========== 回憶牆 ========== */
 .memory-wall {
   padding: 80px 20px;
-  background: linear-gradient(135deg, #667eea15, #764ba215);
+  background: linear-gradient(135deg, #667eea10, #764ba210);
 }
 .memory-grid {
   display: grid;
@@ -298,6 +354,7 @@ body {
   box-shadow: 0 4px 20px var(--shadow);
   transition: all 0.3s;
   position: relative;
+  border: 1px solid rgba(0,0,0,0.04);
 }
 .memory-card:hover {
   transform: translateY(-5px) rotate(-0.5deg);
@@ -317,268 +374,158 @@ body {
   font-size: 1.1rem;
   margin-bottom: 5px;
 }
-.memory-card .date {
-  font-size: 0.8rem;
-  color: #aaa;
-  margin-bottom: 10px;
-}
-.memory-card p {
-  font-size: 0.9rem;
-  color: #555;
-  line-height: 1.6;
-}
-.memory-emoji { font-size: 2rem; margin-bottom: 10px; }
 
-/* ========== 留言牆 ========== */
+/* ========== 留言板 ========== */
 .guestbook {
-  padding: 60px 20px;
-  background: var(--bg);
+  padding: 80px 20px;
+  background: #fff;
 }
 .guestbook-form {
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto 40px;
-  background: #fff;
+  background: #f8f6ff;
+  border-radius: 20px;
   padding: 30px;
-  border-radius: 16px;
   box-shadow: 0 4px 20px var(--shadow);
 }
 .guestbook-form h3 {
-  text-align: center;
+  font-size: 1.2rem;
   margin-bottom: 20px;
+  color: #555;
 }
 .guestbook-form input,
 .guestbook-form textarea {
   width: 100%;
-  padding: 12px 15px;
-  border: 2px solid #eee;
+  padding: 12px 16px;
+  border: 2px solid #e0e0e0;
   border-radius: 12px;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-family: inherit;
-  margin-bottom: 15px;
-  transition: border-color 0.3s;
-  resize: vertical;
+  margin-bottom: 12px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  background: #fff;
 }
 .guestbook-form input:focus,
 .guestbook-form textarea:focus {
   outline: none;
-  border-color: var(--blue);
+  border-color: var(--purple);
+  box-shadow: 0 0 0 3px rgba(107, 78, 142, 0.12);
 }
+.guestbook-form textarea { resize: vertical; min-height: 80px; }
 .guestbook-form button {
-  width: 100%;
-  padding: 14px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: #fff;
+  padding: 12px 28px;
   border: none;
-  border-radius: 12px;
-  font-size: 1.1rem;
+  border-radius: 30px;
+  font-size: 1rem;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: all 0.3s;
+  background: linear-gradient(135deg, var(--purple), var(--purple2));
+  color: #fff;
+  font-weight: 500;
+  white-space: nowrap;
 }
 .guestbook-form button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102,126,234,0.4);
+  box-shadow: 0 6px 20px rgba(107, 78, 142, 0.35);
+}
+.guestbook-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
 }
 .guestbook-messages {
   max-width: 600px;
   margin: 0 auto;
 }
-.message-item {
-  background: #fff;
+.story-card {
+  background: #f8f6ff;
+  border-radius: 16px;
   padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 12px;
-  animation: fadeInUp 0.3s ease;
-  box-shadow: 0 2px 10px var(--shadow);
+  margin-bottom: 16px;
+  box-shadow: 0 2px 12px var(--shadow);
+  transition: all 0.3s;
+  animation: fadeInUp 0.4s ease;
 }
-.message-item strong {
-  color: #333;
+.story-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
 }
-.message-item .time {
+.sc-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.sc-name {
+  font-weight: 600;
+  color: var(--purple);
+  font-size: 0.95rem;
+}
+.sc-time {
   font-size: 0.8rem;
   color: #aaa;
-  float: right;
 }
-.message-item p {
-  margin-top: 8px;
+.sc-text {
   color: #555;
-  line-height: 1.6;
+  line-height: 1.7;
+  font-size: 0.95rem;
 }
-
-/* ========== FOOTER ========== */
-footer {
+.sc-tag {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 2px 10px;
+  background: #e8e0f0;
+  color: var(--purple);
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+.empty-stories {
   text-align: center;
-  padding: 40px;
-  color: #888;
-  font-size: 0.9rem;
+  padding: 60px 20px;
+  color: #aaa;
 }
+.empty-stories p { margin-bottom: 10px; font-size: 1rem; }
+.empty-stories p:first-child { font-size: 3rem; }
 
-/* ========== ANIMATIONS ========== */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(10px); }
-}
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-/* ========== RESPONSIVE ========== */
-@media (max-width: 768px) {
-  .blackboard { padding: 20px; }
-  .timeline { padding-left: 40px; }
-  .timeline-dot { left: -25px; width: 16px; height: 16px; }
-}
-
-/* 零食櫥窗 */
-.candy-display {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 100;
-}
-.candy-btn {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: none;
-  background: linear-gradient(135deg, var(--pink), var(--yellow));
-  cursor: pointer;
-  font-size: 1.8rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-  transition: transform 0.3s;
-}
-.candy-btn:hover { transform: scale(1.1) rotate(10deg); }
-
-/* 音乐播放器浮窗 */
-.music-player {
-  position: fixed;
-  bottom: 90px;
-  right: 20px;
-  z-index: 100;
-  display: none;
-}
-.music-player.show { display: block; }
-.music-controls {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  background: #fff;
-  padding: 10px 15px;
-  border-radius: 30px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-}
-.music-controls button {
-  border: none;
-  background: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  padding: 5px;
-}
-
-/* ===== 滚动留言跑马灯 ===== */
-.marquee-section {
-  background: linear-gradient(135deg, #4a3f6b, #6b4e8e);
-  padding: 18px 0;
-  overflow: hidden;
-  position: relative;
-  border-top: 2px solid rgba(255,255,255,0.1);
-  border-bottom: 2px solid rgba(255,255,255,0.1);
-}
-.marquee-section::before,
-.marquee-section::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 60px;
-  z-index: 2;
-  pointer-events: none;
-}
-.marquee-section::before {
-  left: 0;
-  background: linear-gradient(90deg, #4a3f6b, transparent);
-}
-.marquee-section::after {
-  right: 0;
-  background: linear-gradient(-90deg, #4a3f6b, transparent);
-}
-.marquee-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: #ffd700;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 0 16px;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.marquee-track {
-  display: flex;
-  align-items: center;
-  gap: 50px;
-  animation: marqueeScroll 40s linear infinite;
-  width: max-content;
-  min-width: 100%;
-  padding-right: 20px;
-}
-.marquee-track:hover {
-  animation-play-state: paused;
-}
-@keyframes marqueeScroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-.marquee-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  white-space: nowrap;
-  color: rgba(255,255,255,0.85);
-  font-size: 14px;
-}
-.marquee-item .mq-icon {
-  font-size: 16px;
-}
-.marquee-item .mq-name {
-  font-weight: 600;
-  color: #ffd700;
-}
-.marquee-item .mq-sep {
-  color: rgba(255,255,255,0.3);
-  margin: 0 4px;
-}
-.marquee-inner {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  animation: marqueeScroll 30s linear infinite;
-  width: max-content;
-}
-.marquee-inner:hover {
-  animation-play-state: paused;
-}
-@keyframes marqueeScroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-
-/* ===== 校园相册 ===== */
+/* ========== 相冊 ========== */
 .gallery-section {
-  padding: 40px 16px 60px;
+  padding: 60px 16px 80px;
   background: #f7f3ed;
+}
+.gallery-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 30px;
+  padding: 0 16px;
+}
+.gallery-filter {
+  padding: 6px 18px;
+  border: 2px solid #ddd;
+  border-radius: 20px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.3s;
+  font-family: inherit;
+  color: #666;
+}
+.gallery-filter:hover {
+  border-color: var(--purple);
+  color: var(--purple);
+}
+.gallery-filter.active {
+  background: linear-gradient(135deg, var(--purple), var(--purple2));
+  color: #fff;
+  border-color: var(--purple);
 }
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 10px;
-  max-width: 900px;
-  margin: 20px auto 0;
+  max-width: 960px;
+  margin: 0 auto;
   padding: 0 16px;
 }
 .gallery-item {
@@ -599,29 +546,43 @@ footer {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
+  transition: transform 0.5s;
 }
+.gallery-item:hover img { transform: scale(1.1); }
 .gallery-item .gl-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, rgba(0,0,0,0.4) 0%, transparent 50%);
+  background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.3));
   opacity: 0;
   transition: opacity 0.3s;
 }
-.gallery-item:hover .gl-overlay {
-  opacity: 1;
-}
+.gallery-item:hover .gl-overlay { opacity: 1; }
 .gallery-item .gl-icon {
   position: absolute;
-  bottom: 8px;
-  right: 8px;
-  color: #fff;
-  font-size: 18px;
+  bottom: 10px;
+  right: 10px;
+  font-size: 1.2rem;
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.3s, transform 0.3s;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 .gallery-item:hover .gl-icon {
   opacity: 1;
+  transform: translateY(-2px);
+}
+.gallery-loading {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px;
+  color: #aaa;
+}
+.gallery-loading span { font-size: 2rem; display: block; margin-bottom: 10px; }
+.gallery-count {
+  text-align: center;
+  color: #999;
+  font-size: 0.85rem;
+  margin-top: 16px;
+  padding: 0 16px;
 }
 
 /* Lightbox */
@@ -630,9 +591,9 @@ footer {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.92);
-  z-index: 9999;
-  align-items: center;
+  z-index: 999;
   justify-content: center;
+  align-items: center;
   padding: 20px;
 }
 .lightbox.show {
@@ -641,66 +602,244 @@ footer {
 .lightbox img {
   max-width: 95vw;
   max-height: 90vh;
-  border-radius: 8px;
   object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 10px 60px rgba(0,0,0,0.5);
+  animation: fadeInUp 0.3s ease;
 }
-.lightbox .lb-close {
+.lb-close {
   position: absolute;
   top: 20px;
-  right: 30px;
-  color: #fff;
-  font-size: 32px;
-  cursor: pointer;
-  background: rgba(255,255,255,0.1);
+  right: 20px;
   width: 44px;
   height: 44px;
+  border: none;
   border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s;
-  border: none;
+  backdrop-filter: blur(4px);
 }
-.lightbox .lb-close:hover {
+.lb-close:hover {
   background: rgba(255,255,255,0.3);
+  transform: rotate(90deg);
 }
-.lightbox .lb-nav {
+.lb-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  color: #fff;
-  font-size: 36px;
-  cursor: pointer;
-  background: rgba(255,255,255,0.1);
   width: 50px;
   height: 50px;
+  border: none;
   border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: all 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s;
-  border: none;
+  backdrop-filter: blur(4px);
 }
-.lightbox .lb-nav:hover {
-  background: rgba(255,255,255,0.3);
+.lb-nav:hover {
+  background: rgba(255,255,255,0.25);
+  transform: translateY(-50%) scale(1.1);
 }
-.lightbox .lb-prev { left: 20px; }
-.lightbox .lb-next { right: 20px; }
-.lightbox .lb-counter {
+.lb-prev { left: 20px; }
+.lb-next { right: 20px; }
+.lb-counter {
   position: absolute;
-  bottom: 30px;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   color: rgba(255,255,255,0.6);
-  font-size: 14px;
-  letter-spacing: 2px;
+  font-size: 0.9rem;
+  background: rgba(0,0,0,0.4);
+  padding: 6px 16px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
 }
 
-@media (max-width: 600px) {
-  .gallery-grid {
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 6px;
-  }
+/* ========== 音樂播放器 ========== */
+.music-fab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+}
+.music-fab-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, var(--pink), var(--yellow));
+  cursor: pointer;
+  font-size: 1.8rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.music-fab-btn:hover {
+  transform: scale(1.1) rotate(10deg);
+  box-shadow: 0 6px 28px rgba(0,0,0,0.3);
+}
+.music-fab-btn.playing {
+  animation: musicPulse 2s infinite;
+}
+@keyframes musicPulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+  50% { box-shadow: 0 4px 30px rgba(244, 164, 184, 0.5); }
+}
+.music-player {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  z-index: 100;
+  display: none;
+  animation: slideUp 0.3s ease;
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.music-player.show { display: block; }
+.music-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background: #fff;
+  padding: 12px 20px;
+  border-radius: 30px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+.music-controls button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: var(--purple);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.music-controls button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(107, 78, 142, 0.3);
+}
+.music-controls button:last-child {
+  background: #eee;
+  color: #666;
+  font-size: 0.8rem;
+}
+.music-controls button:last-child:hover {
+  background: #ddd;
+}
+#songTitle {
+  font-size: 0.9rem;
+  color: #555;
+  font-weight: 500;
+  min-width: 100px;
+}
+.music-progress {
+  width: 80px;
+  height: 4px;
+  background: #eee;
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.music-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--pink), var(--yellow));
+  border-radius: 2px;
+  width: 0%;
+  transition: width 0.1s linear;
 }
 
+/* ========== Footer ========== */
+footer {
+  text-align: center;
+  padding: 40px 20px;
+  color: #888;
+  font-size: 0.9rem;
+  background: #f5f0e8;
+}
+footer .footer-heart {
+  color: var(--pink);
+  animation: heartbeat 1.5s infinite;
+  display: inline-block;
+}
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+footer .footer-quote {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: #aaa;
+  font-style: italic;
+}
+
+/* ========== 動畫工具 ========== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  z-index: 9999;
+  opacity: 0;
+  transition: all 0.3s;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+  .blackboard { padding: 20px; }
+  .timeline { padding-left: 40px; }
+  .timeline-dot { left: -25px; width: 16px; height: 16px; }
+  .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
+  .lb-nav { width: 40px; height: 40px; font-size: 1.2rem; }
+  .lb-prev { left: 10px; }
+  .lb-next { right: 10px; }
+}
+@media (max-width: 480px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .hero-title { white-space: normal; }
+  .music-progress { width: 60px; }
+}
 </style>
 </head>
 <body>
@@ -708,62 +847,72 @@ footer {
 <!-- ========== HERO ========== -->
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="deco-1">✏️</div>
-  <div class="deco-2">🎒</div>
-  <div class="deco-3">📐</div>
-  <h1 class="hero-title">那些年，我们一起走过的初中</h1>
-  <p class="hero-sub">2022 — 2025 · 青春不散场</p>
-  <div class="hero-scroll" onclick="document.querySelector('.story-section').scrollIntoView({behavior:'smooth'})">⌄</div>
+  <div class="hero-emoji">✏️</div>
+  <div class="hero-emoji">🎒</div>
+  <div class="hero-emoji">📐</div>
+  <div class="hero-emoji">🏫</div>
+  <h1 class="hero-title">那些年，我們一起走過的初中</h1>
+  <p class="hero-sub">2022 — 2025 · 青春不散場</p>
+  <div class="hero-scroll" onclick="document.querySelector('.blackboard-section').scrollIntoView({behavior:'smooth'})">⌄</div>
 </section>
 
+<!-- ========== 黑板打字機 ========== -->
+<section class="blackboard-section" id="storySection">
+  <div class="blackboard">
+    <h2 class="blackboard-title">🎬 那些年...</h2>
+    <hr class="chalk-line">
+    <div class="blackboard-text" id="boardText"></div>
+  </div>
+</section>
 
-<!-- ========== 滚动留言 ========== -->
+<!-- ========== 滾動留言 ========== -->
 <div class="marquee-section">
   <div style="display:flex;align-items:center;overflow:hidden;max-width:100%">
-    <span class="marquee-label">💬 滚动留言</span>
+    <span class="marquee-label">💬 滾動留言</span>
     <div class="marquee-track" id="marqueeTrack" style="width:100%"></div>
   </div>
 </div>
 
-<!-- ========== 时间线 ========== -->
+<!-- ========== 時間線 ========== -->
 <section class="timeline-section">
-  <h2 class="section-title">⏳ 我们的时间线</h2>
-  <p class="section-sub">那些年一起做过的傻事，现在看都是最好的回忆</p>
+  <h2 class="section-title">⏳ 我們的時間線</h2>
+  <p class="section-sub">那些年一起做過的傻事，現在看都是最好的回憶</p>
   <div class="timeline" id="timelineContainer"></div>
 </section>
 
-<!-- ========== 回忆牆 ========== -->
+<!-- ========== 回憶牆 ========== -->
 <section class="memory-wall">
-  <h2 class="section-title">📸 回忆牆</h2>
-  <p class="section-sub">每个人心中都有一个最好的同学</p>
+  <h2 class="section-title">📸 回憶牆</h2>
+  <p class="section-sub">每個人心中都有一個最好的同學</p>
   <div class="memory-grid" id="memoryGrid"></div>
 </section>
 
-<!-- ========== 留言牆 ========== -->
+<!-- ========== 留言板 ========== -->
 <section class="guestbook">
-  <h2 class="section-title">💬 同学留言板</h2>
-  <p class="section-sub">留下你想对同学们说的话</p>
+  <h2 class="section-title">💬 同學留言板</h2>
+  <p class="section-sub">留下你想對同學們說的話</p>
   <div class="guestbook-form">
     <h3>✏️ 分享你的故事</h3>
-    <input type="text" id="msgName" placeholder="你的名字（或外号）" maxlength="20">
-    <textarea id="msgContent" rows="3" placeholder="分享你在初中的故事、趣事、想对同学们说的话..." maxlength="500"></textarea>
-    <div style="display:flex;gap:8px">
-      <input type="text" id="msgTag" placeholder="#标签（如：体育课）" maxlength="10" style="flex:1">
-      <button onclick="addMessage()" style="white-space:nowrap">📮 分享故事</button>
+    <input type="text" id="msgName" placeholder="你的名字（或綽號）" maxlength="20">
+    <textarea id="msgContent" rows="3" placeholder="分享你在初中的故事、趣事、想對同學們說的話..." maxlength="500"></textarea>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <input type="text" id="msgTag" placeholder="#標籤（如：體育課）" maxlength="10" style="flex:1;min-width:100px">
+      <button id="shareBtn" onclick="addMessage()">📮 分享故事</button>
     </div>
   </div>
   <div class="guestbook-messages" id="messageList"></div>
 </section>
 
-
-<!-- ========== 校园相册 ========== -->
+<!-- ========== 校園相冊 ========== -->
 <section class="gallery-section">
-  <h2 class="section-title">📸 校园相册</h2>
-  <p class="section-sub">那些年，我们用照片记录的时光</p>
+  <h2 class="section-title">📸 校園相冊</h2>
+  <p class="section-sub">那些年，我們用照片記錄的時光</p>
+  <div class="gallery-filters" id="galleryFilters"></div>
   <div class="gallery-grid" id="galleryGrid"></div>
+  <div class="gallery-count" id="galleryCount"></div>
 </section>
 
-<!-- Lightbox -->
+<!-- ========== Lightbox ========== -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
   <button class="lb-close" onclick="closeLightbox()">✕</button>
   <button class="lb-nav lb-prev" onclick="prevPhoto()">‹</button>
@@ -772,59 +921,63 @@ footer {
   <div class="lb-counter" id="lbCounter"></div>
 </div>
 
-<!-- ========== 音乐播放器 ========== -->
-<div class="candy-display">
-  <button class="candy-btn" onclick="toggleMusic()">🎵</button>
+<!-- ========== 音樂播放器 ========== -->
+<div class="music-fab">
+  <button class="music-fab-btn" id="musicFab" onclick="toggleMusic()">🎵</button>
 </div>
 <div class="music-player" id="musicPlayer">
   <div class="music-controls">
     <button onclick="togglePlay()" id="playBtn">▶️</button>
-    <span id="songTitle">晴天 - 周杰伦</span>
+    <span id="songTitle">晴天 — 周杰倫</span>
+    <div class="music-progress" id="progressContainer" onclick="seekMusic(event)">
+      <div class="music-progress-bar" id="progressBar"></div>
+    </div>
     <button onclick="toggleMusic()">✕</button>
   </div>
-  <audio id="bgMusic" loop>
-    <source src="https://music.163.com/song/media/outer/url?id=1860163.mp3" type="audio/mpeg">
-  </audio>
+  <audio id="bgMusic" loop preload="metadata" crossorigin="anonymous"></audio>
 </div>
 
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
 <footer>
-  🌱 献给我们的初中时光 · 青春是一场没有返程的旅行
+  🌱 獻給我們的初中時光
+  <div class="footer-quote">青春是一場沒有返程的旅行，但回憶會永遠留在這裡 <span class="footer-heart">❤</span></div>
 </footer>
 
 <script>
-// ========== 黑板打字机 ==========
-const boardText = \`还记得吗？
+// ========== 黑板打字機 ==========
+const boardText = `還記得嗎？
 
-2022年的夏天，我们穿着崭新的校服走进那间教室。
-谁也不认识谁，谁也不知道，接下来的三年会成为一生中最珍贵的回忆。
+2022年的夏天，我們穿著嶄新的校服走進那間教室。
+誰也不認識誰，誰也不知道，接下來的三年會成為一生中最珍貴的回憶。
 
-军训的时候——
-站军姿站到腿发抖，晚上卻在宿舍偷偷分享一包泡麵。
-汇演时唱《團结就是力量》，有人唱破了音，有人唱红了眼。
+軍訓的時候——
+站軍姿站到腿發抖，晚上卻在宿舍偷偷分享一包泡麵。
+匯演時唱《團結就是力量》，有人唱破了音，有人唱紅了眼。
 
-初一，我们开始熟悉彼此。
-女生结伴去厕所，男生在走廊追逐打闹。
-第一次月考，有人考砸了哭了一整个午休。
+初一，我們開始熟悉彼此。
+女生結伴去廁所，男生在走廊追逐打鬧。
+第一次月考，有人考砸了哭了一整個午休。
 
-初二，我们有了自己的小圈子。
-课间偷偷传纸条，放学后一起去买五毛钱的辣条。
-那个夏天，操场上的夕陽永远那么好看。
+初二，我們有了自己的小圈子。
+課間偷偷傳紙條，放學後一起去買五毛錢的辣條。
+那個夏天，操場上的夕陽永遠那麼好看。
 
-初三，黑板上的倒计时从280天變成0。
-课桌上的卷子越堆越高，在一起的时间越来越少。
-百日誓师那天，全班喊到嗓子沙啞。
+初三，黑板上的倒計時從280天變成0。
+課桌上的卷子越堆越高，在一起的時間越來越少。
+百日誓師那天，全班喊到嗓子沙啞。
 
-最后一科考完的那个下午——
-阳光很燦爛，风很溫柔。
-我们在校门口说「再见」，以为真的会再见。
+最後一科考完的那個下午——
+陽光很燦爛，風很溫柔。
+我們在校門口說「再見」，以為真的會再見。
 
-后来我们去了不同的城市，有了新的同学和朋友。
-但每次路过母校，还是会忍不住往里面看。
+後來我們去了不同的城市，有了新的同學和朋友。
+但每次路過母校，還是會忍不住往裡面看。
 
-那些年，是最好的我们。
-那些年，是最好的时光。
+那些年，是我們最好的時光。
 
-—— 致我们永不褪色的三年。\`;
+—— 致我們永不褪色的三年。`;
 
 function typeWriter(text, element, speed = 50) {
   let i = 0;
@@ -840,47 +993,58 @@ function typeWriter(text, element, speed = 50) {
   type();
 }
 
-// ========== 时间线数据 ==========
+// ========== 時間線數據 ==========
 const timelineData = [
-  { date: '2022年9月', title: '🎒 初入校园', content: '第一次踏进校门，嶄新的书包里装着暑假作业和期待。教室里五十几张陌生的脸，谁也不知道接下来的三年会发生什么。班主任在黑板写下：「欢迎来到初中。」', tags: ['开学', '初识'] },
-  { date: '2022年10月', title: '🏕️ 军训', content: '站军姿站到腿軟，走正步走到脚麻。晚上宿舍里一起偷吃泡麵，被教官抓到罰做五十个俯臥撑。汇演那天唱《團结就是力量》，唱着唱着有人哭了。', tags: ['军训', '记忆'] },
-  { date: '2022年12月', title: '🎄 圣诞晚会', content: '班里第一次搞晚会，教室掛满了彩带和气球。有人唱歌跑调，全班笑得拍桌子。班长偷偷准备了圣诞礼物，每人一张手写卡片。那晚谁也没写作业。', tags: ['晚会', '欢乐'] },
-  { date: '2023年3月', title: '📚 第一次月考', content: '初中第一次正经考试。数学考完一片哀嚎，有人说选择题全靠蒙。成绩出来那天，有人哭有人笑。班主任说：「这只是开始。」当时覺得好残忍，现在想真是这样。', tags: ['考试', '成长'] },
-  { date: '2023年4月', title: '🏃 春季运动会', content: '4×100接力最后一棒，我们班落后十米。结果最后一棒像开了挂一样连超三人，冲线那一刻全班炸了！那年我们拿了年级第三，奖状貼在教室后牆貼了三年。', tags: ['运动会', '热血'] },
-  { date: '2023年6月', title: '🎤 校园歌手大赛', content: '文艺委员代表我们班唱了一首《那些年》。上台前她紧张得发抖，全班在台下喊「加油」。音乐响起全场安静，唱到副歌有人跟着哼。最后拿了二等奖，但我们心里她就是第一。', tags: ['文艺', '感动'] },
-  { date: '2023年9月', title: '🍂 初二分班', content: '最捨不得的一天。原来的班级被打散重组，好朋友分到了不同班。那天好多人在走廊哭。新班级的第一节课，大家都很沉默。后来慢慢认识了新同学，才发现原来也可以这么好。', tags: ['分班', '离别'] },
-  { date: '2023年11月', title: '📝 第一次家长会', content: '成绩单发下来那天，很多人把试卷藏起来了。家长会结束后，校门口一排排家长黑着脸，氣氛凝重。有个同学的家长会后追着他跑了三条街，成了班里永远的笑话。', tags: ['家长会', '趣事'] },
-  { date: '2024年3月', title: '🌸 春游', content: '全班一起去植物园。女生忙着拍照，男生忙着抓蟲子嚇女生。中午野餐，大家交换零食，有人带了媽媽做的寿司，被一抢而空。回程大巴上全班合唱，司机师傅说第一次见这么吵的班。', tags: ['春游', '欢乐'] },
-  { date: '2024年6月', title: '⚽ 班级足球赛', content: '雨战！操场全是水坑，球踢起来带起一片水花。比分2:2，最后五分鐘前鋒一个远射，球划出弧线鑽进球门。全班冲进雨里庆祝，衣服濕透了也没人在乎。那张渾身泥水的合照，现在还在抽屉里。', tags: ['足球', '热血'] },
-  { date: '2024年9月', title: '🎯 初三开学', content: '教室从三楼搬到四楼，黑板上多了「距中考还有280天」。班主任表情严肃地说：「这一年，会是你们人生中最重要的一年。」牆上的倒计时每天都在變，课桌上的书越堆越高。', tags: ['初三', '奋斗'] },
-  { date: '2024年11月', title: '🌙 晚自习', content: '每天六点半到九点，教室里只有笔尖划过纸张的声音。偶尔有人小声討论题目，被值班老师瞪一眼。最期待的就是课间十分鐘——冲去小卖部买一瓶可乐，就是最大的幸福。', tags: ['晚自习', '日常'] },
-  { date: '2025年1月', title: '❄️ 跨年倒计时', content: '跨年那天，班长在黑板上写了「新年快乐，中考加油」。全班在倒计时牌前合影，笑得都很用力。其實每个人心里都清楚，离分別越来越近了。', tags: ['倒计时', '珍惜'] },
-  { date: '2025年3月', title: '📖 百日誓师', content: '全体初三生在操场上宣誓。喊口号的时候有人哭有人笑，班主任也红了眼眶。「拼搏一百天，让梦想在六月飞翔。」——现在念出这句话，还是会起鸡皮疙瘩。', tags: ['誓师', '感动'] },
-  { date: '2025年4月', title: '📸 毕业照', content: '穿上市里最土的毕业服，在校门口、操场、教学楼前拍了一圈。摄影师说「三二一」，大家喊「茄子」。那张照片现在看，每个人的笑容都那么真。拍完照有人说：「以后聚会要常来啊。」', tags: ['毕业照', '惜别'] },
-  { date: '2025年6月', title: '🎓 中考', content: '最后一科英语考完，走出考场，阳光特别好。没有想象中的狂欢，大家只是静静地收拾书包，互相说着「再见」。那天之后，有些人再也没见过。', tags: ['中考', '告别'] },
-  { date: '2025年7月', title: '🍻 毕业聚餐', content: '全班去了一家火锅店，有人喝醉了抱着班长哭，有人跟三年的「仇人」干杯和解。班主任破天荒没管我们，只是笑着看我们闹。散场的时候，每个人都在同学录上写了很久很久。', tags: ['聚餐', '散场'] },
-  { date: '2025年至今', title: '💫 各自远航', content: '上了不同高中，去了不同城市，有了新的朋友圈。有些人偶尔还在群里聊天，有些人再也没说过话。但每次路过母校，还是会忍不住往里面看。那三年，是我们最好的三年。', tags: ['怀念', '青春'] }
+  { date: '2022年9月', title: '🎒 初入校園', content: '第一次踏進校門，全新的書包裡裝著暑假作業和期待。教室裡五十幾張陌生的臉，誰也不知道接下來的三年會發生什麼。班主任在黑板上寫下：「歡迎來到初中。」', tags: ['開學', '初識'] },
+  { date: '2022年10月', title: '🏕️ 軍訓', content: '站軍姿站到腿軟，走正步走到腳麻。晚上宿舍裡一起偷吃泡麵，被教官抓到罰做五十個伏地挺身。匯演那天唱《團結就是力量》，唱著唱著有人哭了。', tags: ['軍訓', '回憶'] },
+  { date: '2022年12月', title: '🎄 聖誕晚會', content: '班裡第一次搞晚會，教室掛滿了彩帶和氣球。有人唱歌走音，全班笑得拍桌子。班長偷偷準備了聖誕禮物，每人一張手寫卡片。那晚誰也沒寫作業。', tags: ['晚會', '歡樂'] },
+  { date: '2023年3月', title: '📚 第一次月考', content: '初中第一次正經考試。數學考完一片哀嚎，有人說選擇題全靠矇。成績出來那天，有人哭有人笑。班主任說：「這只是開始。」當時覺得好殘忍，現在看真是這樣。', tags: ['考試', '成長'] },
+  { date: '2023年4月', title: '🏃 春季運動會', content: '4×100接力最後一棒，我們班落後十米。結果最後一棒像開了掛一樣連超三人，衝線那一刻全班炸了！那年我們拿了年級第三，獎狀貼在教室後牆貼了三年。', tags: ['運動會', '熱血'] },
+  { date: '2023年6月', title: '🎤 校園歌手大賽', content: '文藝委員代表我們班唱了一首《那些年》。上台前她緊張得發抖，全班在台下喊「加油」。音樂響起全場安靜，唱到副歌有人跟著哼。最後拿了二等獎，但我們心裡她就是第一。', tags: ['文藝', '感動'] },
+  { date: '2023年9月', title: '🍂 初二分班', content: '最不捨的一天。原來的班級被打散重組，好朋友分到了不同班。那天好多人在走廊哭。新班級的第一節課，大家都很沉默。後來慢慢認識了新同學，才發現原來也可以這麼好。', tags: ['分班', '離別'] },
+  { date: '2023年11月', title: '📝 第一次家長會', content: '成績單發下來那天，很多人把試卷藏起來了。家長會結束後，校門口一排排家長黑著臉，氣氛凝重。有個同學的家長會後追著他跑了三條街，成了班裡永遠的笑話。', tags: ['家長會', '趣事'] },
+  { date: '2024年3月', title: '🌸 春遊', content: '全班一起去植物園。女生忙著拍照，男生忙著抓蟲子嚇女生。中午野餐，大家交換零食，有人帶了媽媽做的壽司，被一搶而空。回程大巴上全班合唱，司機師傅說第一次見這麼吵的班。', tags: ['春遊', '歡樂'] },
+  { date: '2024年6月', title: '⚽ 班級足球賽', content: '雨戰！操場全是水坑，球踢起來帶起一片水花。比分2:2，最後五分鐘前鋒一個遠射，球劃出弧線鑽進球門。全班衝進雨裡慶祝，衣服濕透了也沒人在乎。那張渾身泥水的合照，現在還在抽屜裡。', tags: ['足球', '熱血'] },
+  { date: '2024年9月', title: '🎯 初三開學', content: '教室從三樓搬到四樓，黑板上多了「距中考還有280天」。班主任表情嚴肅地說：「這一年，會是你們人生中最重要的一年。」牆上的倒計時每天都在變，課桌上的書越堆越高。', tags: ['初三', '奮鬥'] },
+  { date: '2024年11月', title: '🌙 晚自習', content: '每天六點半到九點，教室裡只有筆尖劃過紙張的聲音。偶爾有人小聲討論題目，被值班老師瞪一眼。最期待的就是課間十分鐘——衝去小賣部買一瓶可樂，就是最大的幸福。', tags: ['晚自習', '日常'] },
+  { date: '2025年1月', title: '❄️ 跨年倒計時', content: '跨年那天，班長在黑板上寫了「新年快樂，中考加油」。全班在倒計時牌前合影，笑得都很用力。其實每個人心裡都清楚，離分別越來越近了。', tags: ['倒計時', '珍惜'] },
+  { date: '2025年3月', title: '📖 百日誓師', content: '全體初三生在操場上宣誓。喊口號的時候有人哭有人笑，班主任也紅了眼眶。「拼搏一百天，讓夢想在六月飛翔。」——現在念出這句話，還是會起雞皮疙瘩。', tags: ['誓師', '感動'] },
+  { date: '2025年4月', title: '📸 畢業照', content: '穿上全市最土的畢業服，在校門口、操場、教學樓前拍了一圈。攝影師說「三二一」，大家喊「茄子」。那張照片現在看，每個人的笑容都那麼真。拍完照有人說：「以後聚會要常來啊。」', tags: ['畢業照', '惜別'] },
+  { date: '2025年6月', title: '🎓 中考', content: '最後一科英語考完，走出考場，陽光特別好。沒有想像中的狂歡，大家只是靜靜地收拾書包，互相說著「再見」。那天之後，有些人再也沒見過。', tags: ['中考', '告別'] },
+  { date: '2025年7月', title: '🍻 畢業聚餐', content: '全班去了一家火鍋店，有人喝醉了抱著班長哭，有人跟三年的「仇人」乾杯和解。班主任破天荒沒管我們，只是笑著看我們鬧。散場的時候，每個人在同學錄上都寫了很久很久。', tags: ['聚餐', '散場'] },
+  { date: '2025年至今', title: '💫 各自遠航', content: '上了不同高中，去了不同城市，有了新的朋友圈。有些人偶爾還在群裡聊天，有些人再也沒說過話。但每次路過母校，還是會忍不住往裡面看。那三年，是我們最好的三年。', tags: ['懷念', '青春'] }
 ];
 
+// ========== 回憶牆數據 ==========
 const memoryData = [
-  { name: '班长', emoji: '👩‍🏫', msg: '你是我们班最靠谱的班长。每次大扫除你都是最后一个走的人，每次班会你都准备得最认真。谢谢你替我们扛了那么多。' },
-  { name: '学霸同桌', emoji: '📖', msg: '感謝你借我抄了三年数学作业，每次考试前还帮我画重点。我数学能及格，有一半功勞是你的！' },
-  { name: '前排女生', emoji: '🌸', msg: '你转过头来借橡皮的样子，大概是初中三年最美的画面。那块橡皮我到现在还留着。' },
-  { name: '死党小胖', emoji: '😄', msg: '一起翻墙出去买零食，一起被罚站，一起在厕所偷偷玩手机。你是我最好的兄弟，没有之一！' },
-  { name: '足球队长', emoji: '⚽', msg: '那场雨中的绝杀球，我们吹了整整三年。其实最怀念的不是进球，是大家一起在雨里奔跑的感觉。' },
-  { name: '文艺委员', emoji: '🎶', msg: '每次音乐课你弹钢琴的时候，全班都会安靜下来。你唱《那些年》的那天，是整个初中最动人的瞬间。' },
-  { name: '后桌兄弟', emoji: '🤣', msg: '上课踢我椅子，下课抢我零食，考试偷看我的卷子。煩得要死，但毕业后最想念的居然是你。' },
-  { name: '班主任', emoji: '👨‍🏫', msg: '当年觉得您太严格了，现在才知道您是为我们好。那句「你们是我带过最吵的班」，是我们最骄傲的标签。' },
-  { name: '语文科代表', emoji: '📝', msg: '你的作文每次都被老师当范文念。我写不出来的时候你就帮我开头，虽然最后还是写跑题了（笑）。' },
-  { name: '隔壁班那个她', emoji: '💕', msg: '每次课间操都故意站最后，就为了多看你一眼。到毕业也没说出口的那句话，就留在这里吧。' },
-  { name: '值日搭档', emoji: '🧹', msg: '跟你搭档值日最开心了——因为你总是做大部分，我在旁边划水。对不起！但你打掃得真的很乾淨！' },
-  { name: '体育课代表', emoji: '🏀', msg: '每次体育课分组，你都会把我这个「廢柴」選到自己队。虽然我永远是拖后腿的那个，但你从来没嫌棄过。' },
-  { name: '小卖部阿姨', emoji: '🏪', msg: '阿姨你还记得我嗎？每天下课都来买辣条和冰可乐的那个小屁孩。五毛钱的快乐，现在花五十块也买不到了。' },
-  { name: '英语老师', emoji: '🇬🇧', msg: '您的课从来没人睡覺，因为您讲课實在太有趣了。每次模仿外國人的语氣，全班都笑得前仰后合。' },
-  { name: '全班同学', emoji: '👥', msg: '三年看似很长，其實很短。短到我还没记住每个人的名字，就要说再见了。无论你们在哪里，都要好好的。' }
+  { name: '班長', emoji: '👩‍🏫', msg: '你是我們班最可靠的班長。每次大掃除你都是最後一個走的人，每次班會你都準備得最認真。謝謝你替我們扛了那麼多。' },
+  { name: '學霸同桌', emoji: '📖', msg: '感謝你借我抄了三年數學作業，每次考試前還幫我畫重點。我數學能及格，有一半功勞是你的！' },
+  { name: '前排女生', emoji: '🌸', msg: '你轉過頭來借橡皮的樣子，大概是初中三年最美的畫面。那塊橡皮我到現在還留著。' },
+  { name: '死黨小胖', emoji: '😄', msg: '一起翻牆出去買零食，一起被罰站，一起在廁所偷偷玩手機。你是我最好的兄弟，沒有之一！' },
+  { name: '足球隊長', emoji: '⚽', msg: '那場雨中的絕殺球，我們吹了整整三年。其實最懷念的不是進球，是大家一起在雨裡奔跑的感覺。' },
+  { name: '文藝委員', emoji: '🎶', msg: '每次音樂課你彈鋼琴的時候，全班都會安靜下來。你唱《那些年》的那天，是整個初中最動人的瞬間。' },
+  { name: '後桌兄弟', emoji: '🤣', msg: '上課踢我椅子，下課搶我零食，考試偷看我的卷子。煩得要死，但畢業後最想念的居然是你。' },
+  { name: '班主任', emoji: '👨‍🏫', msg: '當年覺得您太嚴格了，現在才知道您是為我們好。那句「你們是我帶過最吵的班」，是我們最驕傲的標籤。' },
+  { name: '語文科代表', emoji: '📝', msg: '你的作文每次都被老師當範文唸。我寫不出來的時候你就幫我開頭，雖然最後還是寫跑題了（笑）。' },
+  { name: '隔壁班那個她', emoji: '💕', msg: '每次課間操都故意站最後，就為了多看你一眼。到畢業也沒說出口的那句話，就留在這裡吧。' },
+  { name: '值日搭檔', emoji: '🧹', msg: '跟你搭檔值日最開心了——因為你總是做大部分，我在旁邊划水。對不起！但你打掃得真的很乾淨！' },
+  { name: '體育課代表', emoji: '🏀', msg: '每次體育課分組，你都會把我這個「廢柴」選到自己隊。雖然我永遠是拖後腿的那個，但你從來沒嫌棄過。' },
+  { name: '小賣部阿姨', emoji: '🏪', msg: '阿姨你還記得我嗎？每天下課都來買辣條和冰可樂的那個小屁孩。五毛錢的快樂，現在花五十塊也買不到了。' },
+  { name: '英語老師', emoji: '🇬🇧', msg: '您的課從來沒人睡覺，因為您講課實在太有趣了。每次模仿外國人的語氣，全班都笑得前仰後合。' },
+  { name: '全班同學', emoji: '👥', msg: '三年看似很長，其實很短。短到我還沒記住每個人的名字，就要說再見了。無論你們在哪裡，都要好好的。' }
 ];
 
-// ========== 渲染时间线 ==========
+// ========== 留言板初始化 ==========
+let messages = [];
+
+function loadMessages() {
+  try {
+    const saved = localStorage.getItem('juniorMessages');
+    if (saved) messages = JSON.parse(saved);
+  } catch(e) { messages = []; }
+}
+
+// ========== 渲染時間線 ==========
 function renderTimeline() {
   const container = document.getElementById('timelineContainer');
   timelineData.forEach((item, i) => {
@@ -901,7 +1065,7 @@ function renderTimeline() {
   });
 }
 
-// ========== 渲染回忆牆 ==========
+// ========== 渲染回憶牆 ==========
 function renderMemoryWall() {
   const grid = document.getElementById('memoryGrid');
   const colors = ['#e3f2fd', '#fce4ec', '#e8f5e9', '#fff3e0', '#f3e5f5', '#e0f7fa'];
@@ -923,7 +1087,7 @@ function renderMessages() {
   const list = document.getElementById('messageList');
   if (!list) return;
   if (messages.length === 0) {
-    list.innerHTML = '<div class="empty-stories"><p>📝</p><p>还没有人分享故事……<br>写下你在初中的第一个回忆吧 ✨</p></div>';
+    list.innerHTML = '<div class="empty-stories"><p>📝</p><p>還沒有人分享故事……<br>寫下你在初中的第一個回憶吧 ✨</p></div>';
     return;
   }
   list.innerHTML = messages.map(s => {
@@ -933,66 +1097,144 @@ function renderMessages() {
   renderMarquee();
 }
 
-// ========== 跑马灯渲染 ==========
+// ========== 跑馬燈渲染 ==========
 function renderMarquee() {
   const track = document.getElementById('marqueeTrack');
-  if (!track || messages.length === 0) return;
+  if (!track) return;
+  if (messages.length === 0) {
+    track.innerHTML = '<span class="marquee-empty">💬 暫無留言 — 寫下你的第一個回憶吧</span>';
+    return;
+  }
   const items = messages.slice(0, 20).map(s =>
     '<span class="marquee-item"><span class="mq-icon">💬</span><span class="mq-name">' + s.name + '</span><span class="mq-sep">：</span>' + s.content.slice(0, 30) + (s.content.length > 30 ? '…' : '') + '</span>'
   ).join('<span class="marquee-item" style="color:rgba(255,255,255,0.3)">✦</span>');
   track.innerHTML = items + '<span class="marquee-item" style="color:rgba(255,255,255,0.3)">✦</span>' + items;
 }
 
-// ========== 相册 ==========
+// ========== 相冊 ==========
 let galleryIndex = [];
 let currentPhoto = 0;
+let filteredPhotos = [];
+let activeFilter = 'all';
 
 function renderGallery() {
   const grid = document.getElementById('galleryGrid');
   if (!grid) return;
-  fetch('photo_data.json')
-    .then(r => r.json())
+  grid.innerHTML = '<div class="gallery-loading"><span>📸</span>載入中...</div>';
+
+  fetch('photo_data.json?v=' + Date.now())
+    .then(r => {
+      if (!r.ok) throw new Error('Failed to load');
+      return r.json();
+    })
     .then(photos => {
       galleryIndex = photos;
       if (photos.length === 0) {
-        grid.innerHTML = '<div class="empty-stories"><p>📷</p><p>暂无照片</p></div>';
+        grid.innerHTML = '<div class="empty-stories"><p>📷</p><p>暫無照片</p></div>';
+        document.getElementById('galleryCount').textContent = '';
         return;
       }
-      grid.innerHTML = photos.slice(0, 200).map((p, i) =>
-        '<div class="gallery-item" onclick="openLightbox(' + i + ')"><img src="' + p.src + '" loading="lazy" alt="校园照片 ' + (i+1) + '"><div class="gl-overlay"></div><span class="gl-icon">🔍</span></div>'
-      ).join('');
+      renderFilters(photos);
+      applyFilter('all');
     })
     .catch(() => {
-      grid.innerHTML = '<div class="empty-stories"><p>📷</p><p>相册加载中...</p></div>';
+      grid.innerHTML = '<div class="gallery-loading"><span>😅</span><p>照片載入失敗，請稍後再試</p></div>';
     });
 }
 
-function openLightbox(idx) {
-  currentPhoto = idx;
+function renderFilters(photos) {
+  const container = document.getElementById('galleryFilters');
+  // Auto-group by size categories
+  const categories = { all: '📷 全部' };
+  // We'll just do simple aspect-ratio categories
+  categories.landscape = '🌄 橫圖';
+  categories.portrait = '📱 直圖';
+  categories.square = '🔲 方圖';
+
+  container.innerHTML = Object.entries(categories).map(([key, label]) =>
+    '<button class="gallery-filter' + (key === 'all' ? ' active' : '') + '" data-filter="' + key + '" onclick="applyFilter(\'' + key + '\')">' + label + '</button>'
+  ).join('');
+}
+
+function applyFilter(filter) {
+  activeFilter = filter;
+  const grid = document.getElementById('galleryGrid');
+  document.querySelectorAll('.gallery-filter').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.filter === filter);
+  });
+
+  let filtered = [];
+  if (filter === 'all') {
+    filtered = galleryIndex;
+  } else {
+    filtered = galleryIndex.filter(p => {
+      const ratio = p.w / p.h;
+      if (filter === 'landscape') return ratio > 1.15;
+      if (filter === 'portrait') return ratio < 0.85;
+      if (filter === 'square') return ratio >= 0.85 && ratio <= 1.15;
+      return true;
+    });
+  }
+  filteredPhotos = filtered;
+
+  const maxShow = 200;
+  const show = filtered.slice(0, maxShow);
+  grid.innerHTML = show.map((p, i) =>
+    '<div class="gallery-item" onclick="openLightbox(' + i + ',\'' + filter + '\')"><img src="' + p.src + '" loading="lazy" alt="校園照片 ' + (i+1) + '"><div class="gl-overlay"></div><span class="gl-icon">🔍</span></div>'
+  ).join('');
+
+  const count = filtered.length;
+  const showing = Math.min(count, maxShow);
+  const countText = count > maxShow
+    ? '顯示 ' + showing + ' / ' + count + ' 張照片'
+    : '共 ' + count + ' 張照片';
+  document.getElementById('galleryCount').textContent = countText;
+}
+
+function openLightbox(idx, filter) {
+  const source = filter === 'all' ? galleryIndex : filteredPhotos;
+  const actualIdx = source.indexOf(filteredPhotos[idx]);
+  currentPhoto = actualIdx >= 0 ? actualIdx : idx;
   const lb = document.getElementById('lightbox');
   const img = document.getElementById('lbImage');
-  img.src = galleryIndex[idx].src;
-  document.getElementById('lbCounter').textContent = (idx + 1) + ' / ' + galleryIndex.length;
+  img.src = source[currentPhoto].src;
+  document.getElementById('lbCounter').textContent = (currentPhoto + 1) + ' / ' + source.length;
   lb.classList.add('show');
   document.body.style.overflow = 'hidden';
 }
+
 function closeLightbox(e) {
   if (e && e.target !== e.currentTarget) return;
   document.getElementById('lightbox').classList.remove('show');
   document.body.style.overflow = '';
 }
+
 function prevPhoto() {
-  if (!galleryIndex.length) return;
-  currentPhoto = (currentPhoto - 1 + galleryIndex.length) % galleryIndex.length;
-  document.getElementById('lbImage').src = galleryIndex[currentPhoto].src;
+  const source = activeFilter === 'all' ? galleryIndex : filteredPhotos;
+  if (!source.length) return;
+  const inFilter = filteredPhotos.length > 0;
+  const arr = inFilter ? filteredPhotos : galleryIndex;
+  const currentInArr = arr.indexOf(galleryIndex[currentPhoto]);
+  const newIdx = (currentInArr - 1 + arr.length) % arr.length;
+  currentPhoto = galleryIndex.indexOf(arr[newIdx]);
+  const img = document.getElementById('lbImage');
+  img.src = galleryIndex[currentPhoto].src;
   document.getElementById('lbCounter').textContent = (currentPhoto + 1) + ' / ' + galleryIndex.length;
 }
+
 function nextPhoto() {
-  if (!galleryIndex.length) return;
-  currentPhoto = (currentPhoto + 1) % galleryIndex.length;
-  document.getElementById('lbImage').src = galleryIndex[currentPhoto].src;
+  const source = activeFilter === 'all' ? galleryIndex : filteredPhotos;
+  if (!source.length) return;
+  const inFilter = filteredPhotos.length > 0;
+  const arr = inFilter ? filteredPhotos : galleryIndex;
+  const currentInArr = arr.indexOf(galleryIndex[currentPhoto]);
+  const newIdx = (currentInArr + 1) % arr.length;
+  currentPhoto = galleryIndex.indexOf(arr[newIdx]);
+  const img = document.getElementById('lbImage');
+  img.src = galleryIndex[currentPhoto].src;
   document.getElementById('lbCounter').textContent = (currentPhoto + 1) + ' / ' + galleryIndex.length;
 }
+
 document.addEventListener('keydown', (e) => {
   const lb = document.getElementById('lightbox');
   if (!lb.classList.contains('show')) return;
@@ -1001,58 +1243,159 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowRight') nextPhoto();
 });
 
+// ========== 留言板功能 ==========
 function addMessage() {
-  const name = document.getElementById('msgName').value.trim() || '匿名同学';
+  const btn = document.getElementById('shareBtn');
+  btn.disabled = true;
+
+  const name = document.getElementById('msgName').value.trim() || '匿名同學';
   const content = document.getElementById('msgContent').value.trim();
-  if (!content) return alert('写点什么吧~');
+  const tag = document.getElementById('msgTag').value.trim();
+
+  if (!content) {
+    showToast('✏️ 寫點什麼吧～');
+    btn.disabled = false;
+    return;
+  }
+
+  const now = new Date();
+  const timeStr = now.toLocaleString('zh-TW', {
+    month: 'short', day: 'numeric',
+    hour: '2-digit', minute: '2-digit'
+  });
+
   messages.unshift({
     name,
     content,
-    time: new Date().toLocaleString('zh-CN', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })
+    tag: tag || '',
+    time: timeStr
   });
-  localStorage.setItem('juniorMessages', JSON.stringify(messages));
+
+  try {
+    localStorage.setItem('juniorMessages', JSON.stringify(messages));
+  } catch(e) { /* storage full - ignore */ }
+
   renderMessages();
   document.getElementById('msgContent').value = '';
+  document.getElementById('msgTag').value = '';
+  showToast('✅ 故事已分享！');
+  btn.disabled = false;
 }
 
-// ========== 音乐 ==========
+// ========== 音樂播放器 ==========
 let musicPlaying = false;
+let audioContext = null;
+
 function toggleMusic() {
   const p = document.getElementById('musicPlayer');
   p.classList.toggle('show');
 }
+
 function togglePlay() {
-  musicPlaying = !musicPlaying;
-  // 音乐版权问题，演示效果用文字提示
-  if (musicPlaying) {
-    alert('🎵 那首歌在记忆里浮现：\n「那些年錯过的大雨，那些年錯过的愛情……」');
+  const audio = document.getElementById('bgMusic');
+  const btn = document.getElementById('playBtn');
+  const fab = document.getElementById('musicFab');
+
+  if (!audio.src) {
+    // Use a public domain / freely available music source
+    // 周杰伦 - 晴天 (netease music external link)
+    audio.src = 'https://music.163.com/song/media/outer/url?id=1860163.mp3';
+    audio.volume = 0.5;
+  }
+
+  if (audio.paused) {
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        musicPlaying = true;
+        btn.textContent = '⏸️';
+        fab.classList.add('playing');
+        updateProgress();
+      }).catch(() => {
+        // Autoplay blocked - show message
+        showToast('🎵 點擊播放《晴天》，但瀏覽器擋掉了自動播放，請手動點擊 ▶️');
+        musicPlaying = false;
+        btn.textContent = '▶️';
+        fab.classList.remove('playing');
+      });
+    }
+  } else {
+    audio.pause();
+    musicPlaying = false;
+    btn.textContent = '▶️';
+    fab.classList.remove('playing');
   }
 }
 
+function updateProgress() {
+  const audio = document.getElementById('bgMusic');
+  const bar = document.getElementById('progressBar');
+  if (!audio.duration || audio.paused) return;
+  const pct = (audio.currentTime / audio.duration) * 100;
+  bar.style.width = pct + '%';
+  if (musicPlaying) {
+    requestAnimationFrame(updateProgress);
+  }
+}
+
+function seekMusic(e) {
+  const audio = document.getElementById('bgMusic');
+  if (!audio.duration) return;
+  const rect = e.currentTarget.getBoundingClientRect();
+  const pct = (e.clientX - rect.left) / rect.width;
+  audio.currentTime = pct * audio.duration;
+}
+
+audio.addEventListener('timeupdate', updateProgress);
+audio.addEventListener('ended', () => {
+  const btn = document.getElementById('playBtn');
+  const fab = document.getElementById('musicFab');
+  musicPlaying = false;
+  btn.textContent = '▶️';
+  fab.classList.remove('playing');
+});
+
+// ========== Toast 提示 ==========
+function showToast(text) {
+  const toast = document.getElementById('toast');
+  toast.textContent = text;
+  toast.classList.add('show');
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+// ========== 滾動動畫 ==========
+function initScrollAnimations() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.timeline-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'all 0.6s ease';
+    observer.observe(el);
+  });
+}
+
 // ========== 初始化 ==========
+loadMessages();
 renderMessages();
 renderTimeline();
 renderMemoryWall();
 renderMarquee();
 renderGallery();
+initScrollAnimations();
 
-// ========== 滾动动画 ==========
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
-    }
-  });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.timeline-item').forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(30px)';
-  el.style.transition = 'all 0.6s ease';
-  observer.observe(el);
-});
+// Start typewriter after a short delay
+setTimeout(() => {
+  typeWriter(boardText, document.getElementById('boardText'));
+}, 500);
 </script>
 </body>
 </html>
- 
