@@ -478,6 +478,93 @@ footer {
   cursor: pointer;
   padding: 5px;
 }
+
+/* ===== 滚动留言跑马灯 ===== */
+.marquee-section {
+  background: linear-gradient(135deg, #4a3f6b, #6b4e8e);
+  padding: 18px 0;
+  overflow: hidden;
+  position: relative;
+  border-top: 2px solid rgba(255,255,255,0.1);
+  border-bottom: 2px solid rgba(255,255,255,0.1);
+}
+.marquee-section::before,
+.marquee-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+.marquee-section::before {
+  left: 0;
+  background: linear-gradient(90deg, #4a3f6b, transparent);
+}
+.marquee-section::after {
+  right: 0;
+  background: linear-gradient(-90deg, #4a3f6b, transparent);
+}
+.marquee-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #ffd700;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0 16px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  animation: marqueeScroll 30s linear infinite;
+  width: max-content;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  color: rgba(255,255,255,0.85);
+  font-size: 14px;
+}
+.marquee-item .mq-icon {
+  font-size: 16px;
+}
+.marquee-item .mq-name {
+  font-weight: 600;
+  color: #ffd700;
+}
+.marquee-item .mq-sep {
+  color: rgba(255,255,255,0.3);
+  margin: 0 4px;
+}
+.marquee-inner {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  animation: marqueeScroll 30s linear infinite;
+  width: max-content;
+}
+.marquee-inner:hover {
+  animation-play-state: paused;
+}
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 </style>
 </head>
 <body>
@@ -493,6 +580,15 @@ footer {
   <div class="hero-scroll" onclick="document.querySelector('.story-section').scrollIntoView({behavior:'smooth'})">⌄</div>
 </section>
 
+
+<!-- ========== 滚动留言 ========== -->
+<div class="marquee-section">
+  <div style="display:flex;align-items:center;overflow:hidden">
+    <span class="marquee-label">💬 滚动留言</span>
+    <div class="marquee-track" id="marqueeTrack"></div>
+  </div>
+</div>
+
 <!-- ========== 故事分享 ========== -->
 <div style="background:linear-gradient(135deg,#4a3f6b,#a870b8);padding:60px 20px;text-align:center;position:relative;overflow:hidden">
   <div style="position:absolute;inset:0;opacity:0.08;background:radial-gradient(circle at 30% 50%,#fff 1px,transparent 1px);background-size:30px 30px"></div>
@@ -504,7 +600,7 @@ footer {
     <div class="story-title">📝 <span>我们的故事</span></div>
     <div class="story-form">
       <input type="text" id="storyName" placeholder="你的名字（或外号）" maxlength="20">
-      <textarea id="storyContent" rows="3" placeholder="分享你在初中的故事、趣事、想说的话..." maxlength="500"></textarea>
+      <textarea id="storyContent" rows="3" placeholder="分享你在初中的故事、趣事、想对同学们说的话..." maxlength="500"></textarea>
       <div style="display:flex;gap:8px">
         <input type="text" id="storyTag" placeholder="#标签（可选，如：体育课）" maxlength="10">
         <button onclick="addStory()" style="white-space:nowrap">📮 分享故事</button>
