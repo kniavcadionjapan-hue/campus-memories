@@ -442,17 +442,22 @@ footer {
   <div class="hero-bg"></div>
   <h1 class="hero-title">那些年，我们一起走过的初中</h1>
   <p class="hero-sub">2022 — 2025 · 青春不散场</p>
-  <div class="hero-scroll" onclick="document.querySelector('.blackboard-section').scrollIntoView({behavior:'smooth'})">⌄</div>
+  <div class="hero-scroll" onclick="document.querySelector('.story-section').scrollIntoView({behavior:'smooth'})">⌄</div>
 </section>
 
-<!-- ========== 黑板 ========== -->
-<section class="blackboard-section">
-  <div class="blackboard">
-    <div class="blackboard-title">📝 班长的话</div>
-    <hr class="chalk-line">
-    <div class="blackboard-text" id="typewriter"></div>
-    <hr class="chalk-line">
-    <div style="text-align:right;color:var(--chalk);font-family:'Noto Sans SC';margin-top:15px;">—— 致我们永不褪色的三年</div>
+<!-- ========== 故事分享 ========== -->
+<section class="story-section">
+  <div class="story-box">
+    <div class="story-title">📝 <span>我们的故事</span></div>
+    <div class="story-form">
+      <input type="text" id="storyName" placeholder="你的名字（或外号）" maxlength="20">
+      <textarea id="storyContent" rows="3" placeholder="分享你在初中的故事、趣事、想说的话..." maxlength="500"></textarea>
+      <div style="display:flex;gap:8px">
+        <input type="text" id="storyTag" placeholder="#标签（可选，如：体育课）" maxlength="10">
+        <button onclick="addStory()" style="white-space:nowrap">📮 分享故事</button>
+      </div>
+    </div>
+    <div id="storyList"></div>
   </div>
 </section>
 
@@ -671,9 +676,7 @@ function togglePlay() {
 }
 
 // ========== 初始化 ==========
-setTimeout(() => {
-  typeWriter(boardText, document.getElementById('typewriter'));
-}, 500);
+renderStories();
 renderTimeline();
 renderMemoryWall();
 renderMessages();
