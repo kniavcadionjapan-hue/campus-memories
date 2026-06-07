@@ -723,27 +723,6 @@ footer {
   </div>
 </div>
 
-<!-- ========== 故事分享 ========== -->
-<div style="background:linear-gradient(135deg,#4a3f6b,#a870b8);padding:60px 20px;text-align:center;position:relative;overflow:hidden">
-  <div style="position:absolute;inset:0;opacity:0.08;background:radial-gradient(circle at 30% 50%,#fff 1px,transparent 1px);background-size:30px 30px"></div>
-  <h2 style="font-family:'Ma Shan Zheng','Noto Sans SC',cursive;font-size:clamp(28px,6vw,48px);color:#fff;font-weight:400;letter-spacing:6px;text-shadow:0 2px 20px rgba(0,0,0,0.3);position:relative;z-index:1">🏫 郑州市二七区绿地爱华学校</h2>
-  <p style="font-family:'Noto Sans SC';font-size:clamp(13px,2vw,16px);color:rgba(255,255,255,0.7);margin-top:10px;letter-spacing:4px;position:relative;z-index:1">2022 — 2025 · 初中三年 · 最好的我们</p>
-</div>
-<section class="story-section">
-  <div class="story-box">
-    <div class="story-title">📝 <span>我们的故事</span></div>
-    <div class="story-form">
-      <input type="text" id="storyName" placeholder="你的名字（或外号）" maxlength="20">
-      <textarea id="storyContent" rows="3" placeholder="分享你在初中的故事、趣事、想对同学们说的话..." maxlength="500"></textarea>
-      <div style="display:flex;gap:8px">
-        <input type="text" id="storyTag" placeholder="#标签（可选，如：体育课）" maxlength="10">
-        <button onclick="addStory()" style="white-space:nowrap">📮 分享故事</button>
-      </div>
-    </div>
-    <div id="storyList"></div>
-  </div>
-</section>
-
 <!-- ========== 时间线 ========== -->
 <section class="timeline-section">
   <h2 class="section-title">⏳ 我们的时间线</h2>
@@ -763,10 +742,13 @@ footer {
   <h2 class="section-title">💬 同学留言板</h2>
   <p class="section-sub">留下你想对同学们说的话</p>
   <div class="guestbook-form">
-    <h3>✏️ 写下你的留言</h3>
+    <h3>✏️ 分享你的故事</h3>
     <input type="text" id="msgName" placeholder="你的名字（或外号）" maxlength="20">
-    <textarea id="msgContent" rows="3" placeholder="想说的话..." maxlength="200"></textarea>
-    <button onclick="addMessage()">📮 发送留言</button>
+    <textarea id="msgContent" rows="3" placeholder="分享你在初中的故事、趣事、想对同学们说的话..." maxlength="500"></textarea>
+    <div style="display:flex;gap:8px">
+      <input type="text" id="msgTag" placeholder="#标签（如：体育课）" maxlength="10" style="flex:1">
+      <button onclick="addMessage()" style="white-space:nowrap">📮 分享故事</button>
+    </div>
   </div>
   <div class="guestbook-messages" id="messageList"></div>
 </section>
@@ -934,18 +916,9 @@ function renderMemoryWall() {
   });
 }
 
-// ========== 留言板 ==========
-let messages = JSON.parse(localStorage.getItem('juniorMessages') || '[]');
 
-function renderMessages() {
-  const list = document.getElementById('messageList');
-  list.innerHTML = messages.map(m => `
-    <div class="message-item">
-      <strong>${m.name}</strong> <span class="time">${m.time}</span>
-      <p>${m.content}</p>
-    </div>
-  `).join('');
-}
+
+
 
 function addMessage() {
   const name = document.getElementById('msgName').value.trim() || '匿名同学';
@@ -976,7 +949,7 @@ function togglePlay() {
 }
 
 // ========== 初始化 ==========
-renderStories();
+renderMessages();
   renderGallery();
 renderTimeline();
 renderMemoryWall();
