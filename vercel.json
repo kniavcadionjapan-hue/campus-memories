@@ -17,6 +17,14 @@
   ],
   "routes": [
     {
+      "src": "/photo_data.json",
+      "dest": "/photo_data.json"
+    },
+    {
+      "src": "/photos/(.*)",
+      "dest": "/photos/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html"
     }
